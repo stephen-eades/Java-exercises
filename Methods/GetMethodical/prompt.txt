@@ -1,0 +1,78 @@
+GetMethodical
+
+For each of the following method descriptions, develop the indicated method and place it in the SafeInput file.  Note that the methods must declared exactly as described, don’t change the name, order or type of the operands.  The methods must be static as shown.
+
+Then implement the indicated test programs using the filenames specified.  All java main classes will be within the GetMethodical project. (See the project screen shot below yours should be exactly like this when you complete the lab. For each method complete a series of sample test runs that reasonably tests it.  Include copies of each output run for each one to support that you did this.  (Note details of the program come after the description of the methods.)
+
+SafeInput:
+
+	Part A: getNonZeroLenString 
+
+public static String getNonZeroLenString(Scanner pipe, String prompt)
+-	Pipe is a Scanner object that you created in main i.e. in, console
+-	Prompt is the message to display as the prompt for the input
+We use this method when we don’t know what form the user’s response will be, but know that it must not be blank.  For instance, asking for the user’s name.  There is no reasonable way to verify a human name but we do know that it should not be blank.
+
+
+	Part B: getRangedInt
+Create a method called getRangedInt that prompts the user to input an integer within a specified inclusive range. (inclusive means that low and high are valid inputs) Make sure that you bullet proof the input by using the hasNext methods, reading the trash, and clearing the pipe after reading the value (the newline fix).
+
+public static int getRangedInt(Scanner pipe, String prompt, int low, int high)
+-	Pipe is a Scanner object that you created in main in the usual way i.e. in or console
+-	Prompt is the message to display as the prompt for the input. 
+This should not include the [lo – hi] display. Code your method to use the prompt supplied by the user and append the [lo – hi] to it.
+-	Low is the low value for the input range 
+-	High is the high value for the input range
+
+
+	Part C: getRangedDouble
+Similarly do one to input double values within a range:
+
+public static int getRangedDouble(Scanner pipe, String prompt, double low, double high)
+-	Pipe is a Scanner object that you created in main i.e. in
+-	Prompt is the message to display as the prompt for the input. Again your method should build and append the range [lo – hi] to the prompt supplied by the user.
+-	Low is the low value for the input range 
+-	High is the high value for the input range
+
+
+Part D: getYNConfirm
+
+This is an input method that gets a Yes or No [Y/N] returning true for yes and false for no.  It should accept yYnN as valid responses and loop until it gets one of them.  Read that carefully: it returns true or false not “Y” of “N”!
+
+public static boolean getYNConfirm(Scanner pipe, String prompt)
+-	Pipe is a Scanner object that you created in main i.e. in, console
+-	Prompt is the message to display as the prompt for the input
+
+___________________________________________________
+
+Program 01: Get User Name (GetUserName.java):
+
+	Self-explanatory. Type in the given code for the getZeroLengthString into your SafeInput.java file. Test and make sure that the program runs and retrieves the user name.
+
+
+Program 02: Date and Time of Birth (BirthDateTime.java):
+
+	Use the getRangedInt method to input the year (1950-2010), month (1-12), Day*, hours (1 – 24), Minutes (1-59) of a person’s birth
+Note: use a switch() conditional selector structure to limit the user to the correct number of days for the month they were born in. For instance if they were born in Feb [1-29], Oct [1-31].  HINT: there are only a few groups here not 12 different ones! 
+
+
+Program 03: Check Out at the 10$ Store (CheckOut.java):
+
+	Use your other two functions for this program.  
+At the 10$ store nothing is more than $10.00.  Prompt the user for the price of their item (.50 cents to $9.99 dollars) using the getRangedDouble method and continue to input items as long as they indicate that they have more using your getYNConfirm method.  Display the total cost of the item(s) to 2 decimal places with printf.  
+
+
+Part E and Program 04: Pretty Header (PrettyHeader.java):
+
+This program does not use any of the previous methods but requires you to write an additional one.
+Create a method (in SafeInput) that creates a Pretty header like this:
+
+***************************************************************** 
+***     	      Message Centered Here                   ***
+*****************************************************************
+public static void prettyHeader(String msg)
+
+The output is always 60 characters wide for each line.  Use loops to print out the lines.  Long output statements of stars are not allowed!  (Use loops instead.)
+Center the msg on the second line with 3 stars on either end.  HINT: use msg.length() to determine the length in characters of the msg and then use this info to calculate how to center it within the 60 character wide header.
+
+
