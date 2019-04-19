@@ -1,0 +1,4 @@
+BirthMonth
+
+A program that asks the user to enter their birth month (integer 1 – 12 inclusive). If the user enters a value in range, the program echoes the input (“Your birth month is: N”) If the value is not in the range it outputs an error msg (“You entered an incorrect month value: N”).   Here N should be the value they entered.  Careful here! You have to first bullet proof the input before you can check to see if the value is in range!  Be sure to communicate clearly with the user: “You did not enter a number” or “You did not enter a number between 1 and 12.  
+Tests: Bad Input, Number in Range, Number not in range.

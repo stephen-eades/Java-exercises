@@ -1,0 +1,3 @@
+BuildingCosts
+
+A program that calculates and displays the cost of building materials.  Given these inputs: width, height, and cost per square foot.  Compute the total area and then multiply that by the cost per square foot to obtain the total cost.  Yep, you have to test each input before reading it in.  If you get a bad input don’t continue to read in values terminate the program with an error msg. Testing: really each case for each value being correct or not, but it’s ok to just do that for two of the variables and then test to make sure the calculation is correct. 
