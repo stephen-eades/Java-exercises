@@ -1,0 +1,32 @@
+GettingLoopy
+
+A. Loopy:
+	1. loop that counts (i.e. displays the count) up by 1 from 0 to 30 
+	2. loop that counts down by 1 from 30 to 0
+	3. loop that counts up by 3 from 0 to 18
+	4. loop that counts down by 2 from 10 to 0
+	5. A nested loop that creates this figure (there are no blank lines)
+		*
+		**
+		***
+		****
+		*****
+	6. A nested loop that creates this figure (there are no blank lines)
+		*****
+		****
+		***
+		**
+		*
+	7. A nested loop that creates this figure (there are no blank lines)
+		*****
+		*****
+		*****
+		*****
+		*****
+
+B. CtoF:
+	Convert user input as Celsius to Fehrenheit. Use a while or (do while if you wish) loop to bulletproof the user 	input.  Now, when the user fails to enter a valid number, the program will display an error msg and then loop 	and prompt them again to try again to input the value correctly.  So, the program will block and repeat until 	they get it right. Be sure to thoroughly test your program.  Include a screen shot here that shows the tests and 	output.
+
+
+C. MyInitial:
+	Write a program that outputs an elaborate capital version of your first initial using * characters.  (Note if your first initial is I use your last initial.) Use loop¬s to print out duplicate lines in the character.  Again no blank lines. Here the first loop would do the first 3 lines and a second would do the rest.
