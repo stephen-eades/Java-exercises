@@ -11,5 +11,5 @@ A collection of exercises and examples demonstrating basic fundamentals and meth
 
 ## Exercise references
 * Big Java Late Objects 2/e - Cay Horstmann  
-* [Dr/ Thomas Wulf](https://cech.uc.edu/faculty-staff.html?eid=wulft&thecomp=uceprof)
+* [Dr. Thomas Wulf](https://cech.uc.edu/faculty-staff.html?eid=wulft&thecomp=uceprof)
 * Built with Eclipse IDE
