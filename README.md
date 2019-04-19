@@ -1,7 +1,7 @@
 # Java-exercises
 A collection of exercises and examples demonstrating basic fundamentals and methods of the Java language.
 
-## Prompts
+## Topics
 * Conditionals
 * Looping
 * Methods
