@@ -1,3 +1,0 @@
-PartyAffiliation
-
-(This task uses Strings:) A program that prompts the user for their party affiliation (Democrat, Republican, or Independent) and responds accordingly with a Donkey, Elephant, Person, or Other.  (i.e. “You get a Democratic Donkey.”)  Notes: create a menu so the user chooses D, R, or I and assume that any other choice will be Other.  This program does not require any input checking. Tests: just the four options D, R, I, Other.

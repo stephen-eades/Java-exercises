@@ -1,3 +1,0 @@
-TypeTeller
-
-Create a program that prompts the user to “Enter some stuff: “.  Determine if the “stuff” is an int or a double and read it in with the appropriate Scanner method, otherwise read it in as a String.  Echo the input value back to the user indicating that it is either an int, double, or string.
