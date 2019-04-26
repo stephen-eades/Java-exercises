@@ -3,7 +3,8 @@ package mypackage;
 import java.util.Scanner;
 
 
-public class SafeInput {
+public class SafeInput 
+{
 	
 	
 		
@@ -15,7 +16,7 @@ public class SafeInput {
 	    */ 
 	   public static String getNonZeroLenString(Scanner pipe, String prompt)
 	   {
-	       String retString = "";  // Set this to zero length. Loop runs until it isn’t
+	       String retString = "";  // Set this to zero length. Loop runs until it isnâ€™t
 	       do
 	       {
 	           System.out.print("\n" +prompt + ": "); // show prompt add space
