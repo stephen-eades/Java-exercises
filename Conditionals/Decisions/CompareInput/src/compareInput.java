@@ -1,9 +1,12 @@
 package mypackage;
+
 import java.util.Scanner;
 
-public class compareInput {
+public class compareInput 
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+        {
 		
 		// Variables
 		Scanner in = new Scanner(System.in);
@@ -23,7 +26,7 @@ public class compareInput {
 				}
 				else
 				{ 
-				   // Not a double can’t use nextDouble() read as String with nextLine() instead
+				   // Not a double canâ€™t use nextDouble() read as String with nextLine() instead
 				   trash = in.nextLine();
 				   System.out.println("\nYou said your number was: " + trash);
 				   System.out.println("Run the program again and enter a valid number!");
@@ -40,7 +43,7 @@ public class compareInput {
 				}
 				else
 				{ 
-				   // Not a double can’t use nextDouble() read as String with nextLine() instead
+				   // Not a double canâ€™t use nextDouble() read as String with nextLine() instead
 				   trash = in.nextLine();
 				   System.out.println("\nYou said your number was: " + trash);
 				   System.out.println("Run the program again and enter a valid number!");
