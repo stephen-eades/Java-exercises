@@ -1,9 +1,12 @@
 package mypackage;
+
 import java.util.Scanner;
 
-public class buildingCost {
+public class buildingCost 
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+        {
 		
 		// Variables
 		Scanner in = new Scanner(System.in);
@@ -24,7 +27,7 @@ public class buildingCost {
 				}
 				else
 				{ 
-				   // Not a double can’t use nextDouble() read as String with nextLine() instead
+				   // Not a double canâ€™t use nextDouble() read as String with nextLine() instead
 				   trash = in.nextLine();
 				   System.out.println("\nYou said your width was: " + trash);
 				   System.out.println("Run the program again and enter a valid width number!");
@@ -41,7 +44,7 @@ public class buildingCost {
 				}
 				else
 				{ 
-				   // Not a double can’t use nextDouble() read as String with nextLine() instead
+				   // Not a double canâ€™t use nextDouble() read as String with nextLine() instead
 				   trash = in.nextLine();
 				   System.out.println("\nYou said your height was: " + trash);
 				   System.out.println("Run the program again and enter a valid height number!");
@@ -58,7 +61,7 @@ public class buildingCost {
 				}
 				else
 				{ 
-				   // Not a double can’t use nextDouble() read as String with nextLine() instead
+				   // Not a double canâ€™t use nextDouble() read as String with nextLine() instead
 				   trash = in.nextLine();
 				   System.out.println("\nYou said your cost per SqFt was: " + trash);
 				   System.out.println("Run the program again and enter a valid cost per SqFt number!");
