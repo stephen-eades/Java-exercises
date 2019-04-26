@@ -1,5 +1,5 @@
 package mypackage;
-// Need to add safeInput file to package to use methods
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,8 +11,8 @@ public class ArrayStuff {
 		Random rnd = new Random();
 		int dataPoints[]; // instantiate array reference
 		dataPoints = new int [100]; // allocate memory to array
-		double sumDataPoints = 0; // used double to calculate more accurate avg
-		double avgDataPoints = 0; // used doubles to calculate more accurate avg
+		double sumDataPoints = 0;
+		double avgDataPoints = 0;
 		Scanner pipe = new Scanner(System.in);
 		String intPrompt = "";
 		int userInt = 0;
@@ -21,6 +21,7 @@ public class ArrayStuff {
 		int indexValue = 0;
 		int maxUserInt = 0;
 		int minUserInt = 100;
+		
 		
 			// For loop (1.b)
 			for (int i = 0; i < dataPoints.length; i++) // loop through entire array
@@ -102,6 +103,7 @@ public class ArrayStuff {
 							// test comparison method for (2.c)
 							System.out.print("\nCOMPARE: Your integer was found in the array: " + contains(dataPoints, userInt));
 						
+		
 				// For loop (2.d)
 				for (int i = 0; i < dataPoints.length; i++) // loop through entire array
 				{
@@ -124,8 +126,6 @@ public class ArrayStuff {
 					// test comparison method for (2.d)
 					System.out.print("\nCOMPARE: The max integer is: " + max(dataPoints));
 					System.out.print("\nCOMPARE: The min integer is " + min(dataPoints));
-				
-				
 				
 	} // end of main method
 	
