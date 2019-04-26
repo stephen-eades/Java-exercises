@@ -3,9 +3,11 @@ package mypackage;
 import java.util.Random;
 import java.util.Scanner;
 
-public class ArrayStuff {
+public class ArrayStuff 
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		
 		// Variables (1.a)
 		Random rnd = new Random();
