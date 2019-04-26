@@ -1,9 +1,11 @@
 package mypackage;
 import java.util.Scanner;
 
-public class birthMonth {
+public class birthMonth 
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		
 		// Variables
 		Scanner in = new Scanner(System.in);
@@ -31,7 +33,7 @@ public class birthMonth {
 			}
 			else
 			{ 
-			   // Not a Int can’t use nextInt() read as String with nextLine() instead
+			   // Not a Int canâ€™t use nextInt() read as String with nextLine() instead
 			   trash = in.nextLine();
 			   System.out.println("\nYou said your birth month was: " + trash);
 			   System.out.println("Run the program again and enter a valid month number (1-12)!");
