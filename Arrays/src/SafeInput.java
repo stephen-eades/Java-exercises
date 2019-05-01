@@ -1,15 +1,17 @@
 package mypackage;
-// imports
-import java.util.Scanner;
 
+import java.util.Scanner;
 
 public class SafeInput 
 {
+
+///////////////////////////
+/////////BOOKMARK//////////
+//////////////////////////
 	
 	
-		
 	/**
-	    * 
+	    * Confirms the provided string is more than 0 length
 	    * @param pipe a Scanner opened to read from System.in
 	    * @param prompt prompt for the user
 	    * @return a String response that is not zero length
