@@ -5,27 +5,30 @@ import java.util.Scanner;
 public class SafeInput 
 {
 	
-	/** Confirms the provided String is more than 0 length
+	  /** Confirms the provided String is more than 0 length
 	    * @param pipe a Scanner opened to read from System.in
 	    * @param prompt prompt for the user
 	    * @return a String response that is not zero length
 	    */ 
 	   public static String getNonZeroLenString(Scanner pipe, String prompt)
 	   {
-		   // We continue looping until we get a String more than zero length
-	       String retString = "";
-	       do
-	       {
+		   // Variables
+		   String retString = "";
+		   
+	           do
+	           {
+			   // We continue looping until we get a String more than zero length
 			   System.out.print("\n" +prompt + ": ");
-	           retString = pipe.nextLine();
-	       } while (retString.length() == 0);
+			   retString = pipe.nextLine();
+			   
+		   } while (retString.length() == 0);
 	       
 	       return retString;
 	   }
 	   
 	   
 	   
-	/** Confirms the provided integer is within the range provided
+	  /** Confirms the provided integer is within the range provided
 	    * @param pipe is a Scanner opened to read from System.in
 	    * @param prompt is the prompt for the user
 	    * @param low is the lowest int available in provided range
@@ -35,27 +38,27 @@ public class SafeInput
 	   public static int getRangedInt(Scanner pipe, String prompt, int low, int high)
 	   {
 		   // Variables
-	       int rangedInt = 0;
-	       String trash = "";
-	       boolean loopAgain = false;
+		   int rangedInt = 0;
+		   String trash = "";
+	           boolean loopAgain = false;
 	       
 	    	   do
 	    	   {
 		    	   // Check for valid input type with hasNextInt
 		    	   System.out.print("\n" +prompt + ": ");
 		    	   if (pipe.hasNextInt()) 
-		    	   {
-					   // If we have an integer, we assign input to variable and test the range
+			   {
+				   // If we have an integer, we assign input to variable and test the range
 		    		   rangedInt = pipe.nextInt();
 		    		   if (rangedInt >= low && rangedInt <= high) 
 		    		   {
-						   // if within range, stop loop and return message
+					   // if within range, stop loop and return message
 		    			   System.out.println("You entered and int of: " + rangedInt);
 		    			   loopAgain = false;
 		    		   }
 		    		   else
 		    		   {
-						   // if outside range, provide an error message and loop again
+					   // if outside range, provide an error message and loop again
 		    			   System.out.println("You entered and int of: " + rangedInt);
 		    			   System.out.println("This int is outside range. Try again.");
 		    			   loopAgain = true;
@@ -63,7 +66,7 @@ public class SafeInput
 		    	   }
 		    	   else
 		    	   {
-					   // if we don't get an integer, process trash as String and loop again
+				   // if we don't get an integer, process trash as String and loop again
 		    		   trash = pipe.nextLine();
 		    		   System.out.println(trash + " is invalid. Please try again with valid input.");
 		    		   loopAgain = true;
@@ -76,7 +79,7 @@ public class SafeInput
 
 	   
 	   
-	/** Confirms the provided double is within the range provided
+	  /** Confirms the provided double is within the range provided
 	    * @param pipe is a Scanner opened to read from System.in
 	    * @param prompt is the prompt for the user
 	    * @param low is the lowest double available in provided range
@@ -86,9 +89,9 @@ public class SafeInput
 	   public static double getRangedDouble(Scanner pipe, String prompt, double low, double high)
 	   {
 		   // Variables
-	       double rangedDouble = 0.00;
-	       String trash = "";
-	       boolean loopAgain = false;
+	           double rangedDouble = 0.00;
+		   String trash = "";
+	           boolean loopAgain = false;
 	       
 	    	   do
 	    	   {
@@ -96,17 +99,17 @@ public class SafeInput
 		    	   System.out.print("\n" +prompt + ": ");
 		    	   if (pipe.hasNextDouble())
 		    	   {
-					   // If we have a double, we assign input to variable and test the range
+				   // If we have a double, we assign input to variable and test the range
 		    		   rangedDouble = pipe.nextDouble();
 		    		   if (rangedDouble >= low && rangedDouble <= high) 
 		    		   {
-						   // If within range, stop loop and return message
+				           // If within range, stop loop and return message
 		    			   System.out.println("You entered a double of: " + rangedDouble);
 		    			   loopAgain = false;
 		    		   }
 		    		   else
 		    		   {
-						   // If outside range, provide an error message and loop again
+				           // If outside range, provide an error message and loop again
 		    			   System.out.println("You entered a double of: " + rangedDouble);
 		    			   System.out.println("This double is outside range. Try again.");
 		    			   loopAgain = true;
@@ -114,7 +117,7 @@ public class SafeInput
 		    	   }
 		    	   else
 		    	   {
-					   // If we don't get a double, process trash as String and loop again
+				   // If we don't get a double, process trash as String and loop again
 		    		   trash = pipe.nextLine();
 		    		   System.out.println(trash + " is invalid. Please try again with valid input.");
 		    		   loopAgain = true;
@@ -127,7 +130,7 @@ public class SafeInput
 	   
 	   
 	   
-	/** Gathers provided answer to Y/N prompt
+	  /** Gathers provided answer to Y/N prompt
 	    * @param pipe is the Scanner opened to read from System.in
 	    * @param prompt is the prompt for the user
 	    * @return true or false value specified for the boolean variable
@@ -136,35 +139,35 @@ public class SafeInput
 	   {
 		   // Variables
 		   String userInput = "";
-	       boolean YNconfirmed = false;
-	       boolean loopAgain = true;
+	           boolean YNconfirmed = false;
+	           boolean loopAgain = true;
 	       
 	       	   do 
 	       	   {
 	       		   // Assign input to variable, then test for a match to "Y" or "N"
 	       		   System.out.print("\n" +prompt + ": ");
 	       		   userInput = pipe.nextLine();
-				   if (userInput.equalsIgnoreCase("Y")) 
-				   {
-					   // If yes, set YNconfirmed to true and end the loop
-					   System.out.println("You entered: " + userInput);
-					   YNconfirmed = true;
-					   loopAgain = false;
-				   }
-				   else if (userInput.equalsIgnoreCase("N"))
-				   {
-					   // If no, set YNconfirmed to false and end the loop
-					   System.out.println("You entered: " + userInput);
-					   YNconfirmed = false;
-					   loopAgain = false;
-				   }
-				   else
-				   {
-					   // If invalid input, loop again for new input
-					   System.out.println("You entered: " + userInput + " which is invalid. Try again.");
-					   YNconfirmed = false;
-					   loopAgain = true;
-				   }
+			   if (userInput.equalsIgnoreCase("Y")) 
+			   {
+				   // If yes, set YNconfirmed to true and end the loop
+				   System.out.println("You entered: " + userInput);
+				   YNconfirmed = true;
+				   loopAgain = false;
+			   }
+			   else if (userInput.equalsIgnoreCase("N"))
+			   {
+				   // If no, set YNconfirmed to false and end the loop
+				   System.out.println("You entered: " + userInput);
+				   YNconfirmed = false;
+				   loopAgain = false;
+			   }
+			   else
+			   {
+				   // If invalid input, loop again for new input
+				   System.out.println("You entered: " + userInput + " which is invalid. Try again.");
+				   YNconfirmed = false;
+				   loopAgain = true;
+			   }
 				   
 	       	   } while (loopAgain == true);
 			   
@@ -173,7 +176,7 @@ public class SafeInput
 	   
 	   
 	   
-		/** Prints a styled header with the provided String message centered
+          /** Prints a styled header with the provided String message centered
 	    * @param pipe is a Scanner opened to read from System.in
 	    * @param prompt is the prompt for the user
 	    * @return the styled header 
@@ -182,36 +185,36 @@ public class SafeInput
 	   {
 		   // Variables
 		   int whiteSpace = (54 - msg.length())/2;
-		   
-			   if(msg.length() < 54)
+		   	
+			if(msg.length() < 54)
+			{
+				for (int x = 0; x <= 60; x++)
 				{
-					for (int x = 0; x <= 60; x++)
-					{
-						System.out.print("*");
-					}
-					System.out.print("\n***");
-						
-						for (int x = 0; x <= whiteSpace; x++)
-						{
-							System.out.print(" ");
-						}
-						System.out.print(msg);
-
-						for (int x = 0; x <= whiteSpace; x++)
-						{
-							System.out.print(" ");
-						}
-						System.out.print("***");
-						System.out.println("");
-
-					for (int x = 0; x <= 60; x++)
-					{
-						System.out.print("*");
-					}
-					System.out.println("");
+					System.out.print("*");
 				}
-	       
-			return;
+				System.out.print("\n***");
+
+					for (int x = 0; x <= whiteSpace; x++)
+					{
+						System.out.print(" ");
+					}
+					System.out.print(msg);
+
+					for (int x = 0; x <= whiteSpace; x++)
+					{
+						System.out.print(" ");
+					}
+					System.out.print("***");
+					System.out.println("");
+
+				for (int x = 0; x <= 60; x++)
+				{
+					System.out.print("*");
+				}
+				System.out.println("");
+			}
+
+		return;
 	   } 
 	  
 }
