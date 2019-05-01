@@ -220,7 +220,7 @@ public class ArrayStuff
 		
 		return occuranceValues;
 	}
-	         
+	
 	
 	
 	/** Returns the sum of the array values
@@ -279,4 +279,5 @@ public class ArrayStuff
 	}
 
 }
+
 
