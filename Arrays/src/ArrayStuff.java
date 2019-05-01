@@ -9,128 +9,127 @@ public class ArrayStuff
 	public static void main(String[] args) 
 	{
 		
-		// Variables (1.a)
+		// Variables
 		Random rnd = new Random();
+		Scanner pipe = new Scanner(System.in);
 		int dataPoints[]; // instantiate array reference
 		dataPoints = new int [100]; // allocate memory to array
-		double sumDataPoints = 0;
-		double avgDataPoints = 0;
-		Scanner pipe = new Scanner(System.in);
-		String intPrompt = "";
 		int userInt = 0;
 		int userIntCounter = 0;
-		boolean matchFound = false;
 		int indexValue = 0;
 		int maxUserInt = 0;
 		int minUserInt = 100;
+		double sumDataPoints = 0;
+		double avgDataPoints = 0;
+		boolean matchFound = false;
 		
 		
-			// For loop (1.b)
-			for (int i = 0; i < dataPoints.length; i++) // loop through entire array
+		
+			// Loop through array and assign random int (1-100) with each iteration
+			for (int i = 0; i < dataPoints.length; i++)
 			{
-				dataPoints[i] = rnd.nextInt(100) + 1; // assign random int 1-100 with each iteration
+				dataPoints[i] = rnd.nextInt(100) + 1;
 			}
 			
-			
-			// For loop (1.c)
-			for (int i = 0; i < dataPoints.length; i++) // loop through entire array
+		
+		
+			// Loop through array and print each value
+			for (int i = 0; i < dataPoints.length; i++)
 			{
-				System.out.print(dataPoints[i] + " | "); // print each value in array 
+				System.out.print(dataPoints[i] + " | ");
 			}
 				
 			
-			// For loop (1.d)
-			for (int i = 0; i < dataPoints.length; i++) // loop through entire array
+		
+			// Calculate sum of array values adding each iteration to sumDataPoints var
+			for (int i = 0; i < dataPoints.length; i++)
 			{
-				sumDataPoints = sumDataPoints + dataPoints[i]; // add each array value to total sum
+				sumDataPoints = sumDataPoints + dataPoints[i];
 			}
-			avgDataPoints = sumDataPoints / 100; // calculate average
-			// used doubles to calculate more accurate average
 			System.out.print("\nThe sum of all random values in the dataPoints array is: " + sumDataPoints);
+		
+			// Calculate average of array values using sumDataPoints var
+			avgDataPoints = sumDataPoints / 100;
 			System.out.print("\nThe average of all random values in the dataPoints array is: " + avgDataPoints);
-			
-			// Call Method (2.e and compare)
+		
+			// Calculate sum and average using helper methods for comparison
 			System.out.print("\nCOMPARE: The sum of dataPoints is: " + sum(dataPoints));
 			System.out.print("\nCOMPARE: The average of dataPoints is: " + getAverage(dataPoints));
 			
-			
-				// Prompt input (2.a)
-				intPrompt = "Please enter a integer between 1-100"; // set prompt to pipe into method
-				userInt = SafeInput.getRangedInt(pipe, intPrompt, 1, 100);
-				
-				
-				// For loop (2.b)
-				for (int i = 0; i < dataPoints.length; i++) // loop through entire array
-				{
-					if (userInt == dataPoints[i]) // check for userInt within array
-					{
-						userIntCounter = userIntCounter + 1;
-					}
-					else
-					{
-						userIntCounter = userIntCounter + 0;
-					}
-				}
-				System.out.print("Your integer appeared " + userIntCounter + " times within the array.");
-					
-					// test comparison method for (2.b)
-					System.out.print("\nCOMPARE: Your integer appears in the array: " + occuranceScan(dataPoints, userInt) + " times.");
-				
-				
-				// For loop (2.c)
-				for (int i = 0; i < dataPoints.length; i++) // loop through entire array
-				{
-					if (userInt == dataPoints[i]) // check for userInt within array
-					{
-						System.out.print("\nYour integer: " + userInt + " was found at index: " + indexValue);
-						matchFound = true;
-						break;
-					}
-					else
-					{
-						indexValue++; // add 1 to index counter and continue loop
-						matchFound = false;
-					}
-				}
-				
-						if (matchFound == false) // only shows that match was not found
-						{
-							System.out.print("\nNo match was found within the array.");
-						}
-						else 
-						{
-							// do nothing
-						}
-						
-							// test comparison method for (2.c)
-							System.out.print("\nCOMPARE: Your integer was found in the array: " + contains(dataPoints, userInt));
-						
 		
-				// For loop (2.d)
-				for (int i = 0; i < dataPoints.length; i++) // loop through entire array
+			
+			// Get user input as integer
+			userInt = SafeInput.getRangedInt(pipe, "Please enter a integer between 1-100", 1, 100);
+
+			// Loop through array and check for userInt within array
+			for (int i = 0; i < dataPoints.length; i++)
+			{
+				if (userInt == dataPoints[i]) 
 				{
-					if (dataPoints[i] > maxUserInt) // check for max int in array
-					{
-						maxUserInt = dataPoints[i];
-					}
-					else if (dataPoints[i] < minUserInt) // check for min int in array
-					{
-						minUserInt = dataPoints[i];
-					}
-					else 
-					{
-						// do nothing
-					}
+					userIntCounter++;
 				}
-				System.out.print("\nThe max integer in the array is: " + maxUserInt);
-				System.out.print("\nThe minimum integer in the array is: " + minUserInt);
+			}
+			System.out.print("Your integer appeared " + userIntCounter + " times within the array.");
+					
+			// Search array using helper method for comparison
+			System.out.print("\nCOMPARE: Your integer appears in the array: " + occuranceScan(dataPoints, userInt) + " times.");
+
+
+		
+			// Loop through array and checl for userInt within array
+			for (int i = 0; i < dataPoints.length; i++)
+			{
+				if (userInt == dataPoints[i])
+				{
+					// Display the index where userInt is found
+					System.out.print("\nYour integer: " + userInt + " was found at index: " + indexValue);
+					matchFound = true;
+					break;
+				}
+				else
+				{
+					// add 1 to index counter and continue loop
+					indexValue++;
+					matchFound = false;
+				}
+			}
+			// show if no match was found
+			if (matchFound == false)
+			{
+				System.out.print("\nNo match was found within the array.");
+			}
+						
+			// Search for array index using helper method for comparison
+			System.out.print("\nCOMPARE: Your integer was found in the array: " + contains(dataPoints, userInt));
+
+		
+		
+			// Loop through array checking for the max and min integer
+			for (int i = 0; i < dataPoints.length; i++)
+			{
+				if (dataPoints[i] > maxUserInt)
+				{
+					maxUserInt = dataPoints[i];
+				}
+				else if (dataPoints[i] < minUserInt)
+				{
+					minUserInt = dataPoints[i];
+				}
+			}
+			System.out.print("\nThe max integer in the array is: " + maxUserInt);
+			System.out.print("\nThe minimum integer in the array is: " + minUserInt);
+
+			// Search for max and min using helper method for comparison
+			System.out.print("\nCOMPARE: The max integer is: " + max(dataPoints));
+			System.out.print("\nCOMPARE: The min integer is " + min(dataPoints));
 				
-					// test comparison method for (2.d)
-					System.out.print("\nCOMPARE: The max integer is: " + max(dataPoints));
-					System.out.print("\nCOMPARE: The min integer is " + min(dataPoints));
-				
+		
+		
 	} // end of main method
 	
+	
+	
+	// Helper Methods
 	
 	/** Returns the avg value found
 	    * @param values is an array provided 
@@ -138,39 +137,37 @@ public class ArrayStuff
 	    */ 
 	public static double getAverage(int values[])
 	{
-		// variables
+		// Variables
 		double sumValues = 0.00;
 		double avgValues = 0.00;
 		
-			// process array parameter
-			for (int i = 0; i < values.length; i++) // loop through entire array
+			// Loop through array, adding each value to sum and calculating the average
+			for (int i = 0; i < values.length; i++) 
 			{
-				sumValues = sumValues + values[i]; // add each array value to total sum
+				sumValues = sumValues + values[i]; 
 			}
-			avgValues = sumValues / 100; // calculate average
+			avgValues = sumValues / 100;
 		
 		return avgValues;
 	}
 	
 	
+	
 	/** Returns the min value found
 	    * @param values is an array provided 
-	    * @return a double value of the min
+	    * @return an int value of the min
 	    */ 
 	public static int min(int values[])
 	{
 		// Variables
 		int minValuesInt = 100;
 		
-			for (int i = 0; i < values.length; i++) // loop through entire array
+			// Loop through array checking for min
+			for (int i = 0; i < values.length; i++)
 			{
-				if (values[i] < minValuesInt) // check for min int in array
+				if (values[i] < minValuesInt) 
 				{
 					minValuesInt = values[i];
-				}
-				else 
-				{
-					// do nothing
 				}
 			}
 
@@ -178,49 +175,46 @@ public class ArrayStuff
 	}
 	
 	
+	
 	/** Returns the max value found
 	    * @param values is an array provided 
-	    * @return a double value of the max
+	    * @return an int value of the max
 	    */ 
-		public static int max(int values[])
-		{
-			// Variables
-			int maxValuesInt = 0;
-			
-				for (int i = 0; i < values.length; i++) // loop through entire array
+	public static int max(int values[])
+	{
+		// Variables
+		int maxValuesInt = 0;
+
+			// Loop through array checking for max
+			for (int i = 0; i < values.length; i++)
+			{
+				if (values[i] > maxValuesInt)
 				{
-					if (values[i] > maxValuesInt) // check for min int in array
-					{
-						maxValuesInt = values[i];
-					}
-					else 
-					{
-						// do nothing
-					}
+					maxValuesInt = values[i];
 				}
+			}
+
+		return maxValuesInt;
+	}
 	
-			return maxValuesInt;
-		}
 	
 	
-	/** Returns the number of times target is found in the values array
+	/** Returns the number of times target is found in the array
 	    * @param values is an array provided 
-	    * @return a double value of the number of times target is found
+	    * @param target is an int provided
+	    * @return an int value of the number of times target is found
 	    */ 
 	public static int occuranceScan(int values[], int target) 
 	{
-		// variables
+		// Variables
 		int occuranceValues = 0;
 		
-			for (int i = 0; i < values.length; i++) // loop through entire array
+			// Loop through array checking for target within array
+			for (int i = 0; i < values.length; i++)
 			{
-				if (target == values[i]) // check for target within array
+				if (target == values[i])
 				{
-					occuranceValues = occuranceValues + 1;
-				}
-				else
-				{
-					occuranceValues = occuranceValues + 0;
+					occuranceValues++;
 				}
 			}
 		
@@ -228,63 +222,61 @@ public class ArrayStuff
 	}
 	         
 	
-	/** Returns the sum of the values array elements
+	
+	/** Returns the sum of the array values
  	    * @param values is an array provided 
- 	    * @return a double sum of the values
+ 	    * @return an int sum of the values
  	    */ 
 	public static int sum(int values[]) 
 	{
-		// variables
+		// Variables
 		int sumValues = 0;
 		
-			// process array parameter
-			for (int i = 0; i < values.length; i++) // loop through entire array
+			// Loop through array and add each value to sumValues var
+			for (int i = 0; i < values.length; i++)
 			{
-				sumValues = sumValues + values[i]; // add each array value to total sum
+				sumValues = sumValues + values[i];
 			}
 		
 		return sumValues;
 	}
 	
 	
+	
 	/** Returns true if the values array contains target
-	    * @param values is an array provided 
+	    * @param values is an array provided
+	    * @param target is an int provided
 	    * @return a boolean if value is within array
 	    */ 
 	public static boolean contains(int values[], int target)
 	{
-		// variables
+		// Variables
 		boolean containsValue = false;
 		int indexValue = 0;
 		
-
-			for (int i = 0; i < values.length; i++) // loop through entire array
+			// Loop through array checking for target
+			for (int i = 0; i < values.length; i++)
 			{
-				if (target == values[i]) // check for userInt within array
+				if (target == values[i])
 				{
 					containsValue = true;
 					break;
 				}
 				else
 				{
-					indexValue++; // add 1 to index counter and continue loop
+					// add 1 to index counter and continue loop
+					indexValue++;
 					containsValue = false;
 				}
 			}
-			
-					if (containsValue == false) // only shows that match was not found
-					{
-						System.out.print("\nNo match was found within the array.");
-					}
-					else 
-					{
-						// do nothing
-					}
+			// show if no match was found
+			if (containsValue == false)
+			{
+				System.out.print("\nNo match was found within the array.");
+			}
 		
-		// body of method
 		return containsValue;
 	}
 
-	
 }
 
