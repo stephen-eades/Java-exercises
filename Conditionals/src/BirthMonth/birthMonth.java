@@ -7,6 +7,7 @@ public class birthMonth
 
 	public static void main(String[] args) 
 	{
+		
 		// Variables
 		Scanner in = new Scanner(System.in);
 		int userBirthMonth = 0;
