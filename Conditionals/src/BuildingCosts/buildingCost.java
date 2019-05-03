@@ -10,70 +10,71 @@ public class buildingCost
 		
 		// Variables
 		Scanner in = new Scanner(System.in);
-		String trash = ""; // trash input
+		String trash = "";
 		double height = 0;
 		double width = 0;
 		double costPerSqFt = 0;
 		double area = 0;
-		double totalCost = 0;
+		double totalCost = 0;	
 
-			// Prompt for width
+			// Prompt for width and check for double
 			System.out.println("Enter the width: ");
-				if(in.hasNextDouble()) // OK safe to read in a double
+				if(in.hasNextDouble())
 				{
-				    // Get width from user
-				    width = in.nextDouble(); 
-					System.out.println("The width you entered was: " + width); // echo
+				   	// If double, assign to var
+				    	width = in.nextDouble(); 
+					System.out.println("The width you entered was: " + width);
 				}
 				else
 				{ 
-				   // Not a double can’t use nextDouble() read as String with nextLine() instead
-				   trash = in.nextLine();
-				   System.out.println("\nYou said your width was: " + trash);
-				   System.out.println("Run the program again and enter a valid width number!");
-				   System.exit(0);  // terminate the program
+				   	// Not double, can't use nextDouble() so read as String with nextLine() instead
+				   	trash = in.nextLine();
+				   	System.out.println("\nYou said your width was: " + trash);
+				   	System.out.println("Run the program again and enter a valid width number!");
+					System.exit(0);
 				}
 		
-			// Prompt for height
+			// Prompt for height and check for double
 			System.out.println("Enter the height: ");
-				if(in.hasNextDouble()) // OK safe to read in a double
+				if(in.hasNextDouble()
 				{
-				    // Get height from user
-				    height = in.nextDouble(); 
-					System.out.println("The height you entered was: " + height); // echo
+				    	// If double, assign to var
+				    	height = in.nextDouble(); 
+					System.out.println("The height you entered was: " + height);
 				}
 				else
 				{ 
-				   // Not a double can’t use nextDouble() read as String with nextLine() instead
-				   trash = in.nextLine();
-				   System.out.println("\nYou said your height was: " + trash);
-				   System.out.println("Run the program again and enter a valid height number!");
-				   System.exit(0);  // terminate the program
+				   	// Not double, can’t use nextDouble() so read as String with nextLine() instead
+				   	trash = in.nextLine();
+				   	System.out.println("\nYou said your height was: " + trash);
+				   	System.out.println("Run the program again and enter a valid height number!");
+				   	System.exit(0);
 				}
 		
-			// Prompt for cost per SqFt
+			// Prompt for cost per SqFt and check for double
 			System.out.println("Enter the cost per square foot: ");
 				if(in.hasNextDouble()) // OK safe to read in a double
 				{
-				    // Get cost per SqFt from user
+				    	// if double, assign to var
 					costPerSqFt = in.nextDouble(); 
-					System.out.println("The cost per SqFt you entered was: " + costPerSqFt); // echo
+					System.out.println("The cost per SqFt you entered was: " + costPerSqFt);
 				}
 				else
 				{ 
-				   // Not a double can’t use nextDouble() read as String with nextLine() instead
-				   trash = in.nextLine();
-				   System.out.println("\nYou said your cost per SqFt was: " + trash);
-				   System.out.println("Run the program again and enter a valid cost per SqFt number!");
-				   System.exit(0);  // terminate the program
+				   	// Not double, can’t use nextDouble() so read as String with nextLine() instead
+				  	trash = in.nextLine();
+				   	System.out.println("\nYou said your cost per SqFt was: " + trash);
+				   	System.out.println("Run the program again and enter a valid cost per SqFt number!");
+				   	System.exit(0);  // terminate the program
 				}
 	
-					// Calculate Area and display cost
-					area = width * height;
-					System.out.println("The area is: " + area);
-					totalCost = area * costPerSqFt;
-					System.out.println("With the cost per square feet you entered, the total cost of materials is: " + totalCost);
-				
+			// Calculate Area and display cost
+			area = width * height;
+			System.out.println("The area is: " + area);
+			totalCost = area * costPerSqFt;
+			System.out.println("With the cost per square feet you entered, the total cost of materials is: " + totalCost);
+		
+		// Close scanner resource	
 		in.close();
 	}
 
