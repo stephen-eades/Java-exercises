@@ -36,7 +36,7 @@ public class birthMonth
 			{ 
 				// Not in, can’t use nextInt() so read as String with nextLine() instead
 			  	 trash = in.nextLine();
-			   	System.out.println("\nYou said your birth month was: " + trash);
+			   	 System.out.println("\nYou said your birth month was: " + trash);
 			  	 System.out.println("Run the program again and enter a valid month number (1-12)!");
 			  	 System.exit(0);  // terminate the program
 			}
