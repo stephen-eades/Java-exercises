@@ -10,63 +10,62 @@ public class compareInput
 		
 		// Variables
 		Scanner in = new Scanner(System.in);
-		String trash = ""; // trash input
+		String trash = "";
 		double userNumberA = 0;
 		double userNumberB = 0;
 		
-			// Get number A
+			// Get number A using hasNextDouble
 			System.out.println("Enter the first number: ");
-				if(in.hasNextDouble()) // OK safe to read in a double
+				if(in.hasNextDouble())
 				{
-				    // Get width from user
-				    userNumberA = in.nextDouble(); 
-					System.out.println("The first number you entered was: " + userNumberA); // echo
-				    in.nextLine(); // clears the newline from the buffer
-
+				    	// Get width from user and clear the newline from the buffer
+				   	userNumberA = in.nextDouble(); 
+					System.out.println("The first number you entered was: " + userNumberA);
+				    	in.nextLine();
 				}
 				else
 				{ 
-				   // Not a double can’t use nextDouble() read as String with nextLine() instead
-				   trash = in.nextLine();
-				   System.out.println("\nYou said your number was: " + trash);
-				   System.out.println("Run the program again and enter a valid number!");
-				   System.exit(0);  // terminate the program
+				   	// Not a double, so can’t use nextDouble(). Instead read as String with nextLine()
+				   	trash = in.nextLine();
+				   	System.out.println("\nYou said your number was: " + trash);
+				   	System.out.println("Run the program again and enter a valid number!");
+				   	System.exit(0);
 				}
 		
-			// Get number B
+			// Get number B using hasNextDouble
 			System.out.println("Enter the second number: ");
-				if(in.hasNextDouble()) // OK safe to read in a double
+				if(in.hasNextDouble())
 				{
-				    // Get height from user
-				    userNumberB = in.nextDouble(); 
+				    	// Get height from user and clear the newline from the buffer
+				    	userNumberB = in.nextDouble(); 
 					System.out.println("The second number you entered was: " + userNumberB); // echo
 				}
 				else
 				{ 
-				   // Not a double can’t use nextDouble() read as String with nextLine() instead
-				   trash = in.nextLine();
-				   System.out.println("\nYou said your number was: " + trash);
-				   System.out.println("Run the program again and enter a valid number!");
-				   System.exit(0);  // terminate the program
+				   	// Not a double, so can’t use nextDouble(). Instead read as String with nextLine()
+				   	trash = in.nextLine();
+				   	System.out.println("\nYou said your number was: " + trash);
+				   	System.out.println("Run the program again and enter a valid number!");
+				   	System.exit(0);  // terminate the program
 				}
 		
-					// Process numbers
-					if (userNumberA == userNumberB)
-					{
-						System.out.println(userNumberA + " is equal to " + userNumberB);
-					}
-					else if (userNumberA > userNumberB)
-					{
-						System.out.println(userNumberB + " is less than " + userNumberA);
-					}
-					else if (userNumberA < userNumberB)
-					{
-						System.out.println(userNumberA + " is less than " + userNumberB);
-					}
-					else
-					{
-						System.out.println("Error, please enter valid numbers and try again.");
-					}
+				// Process numbers
+				if (userNumberA == userNumberB)
+				{
+					System.out.println(userNumberA + " is equal to " + userNumberB);
+				}
+				else if (userNumberA > userNumberB)
+				{
+					System.out.println(userNumberB + " is less than " + userNumberA);
+				}
+				else if (userNumberA < userNumberB)
+				{
+					System.out.println(userNumberA + " is less than " + userNumberB);
+				}
+				else
+				{
+					System.out.println("Error, please enter valid numbers and try again.");
+				}
 				
 		in.close(); // Closing scanner resource
 	}
