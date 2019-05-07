@@ -1,20 +1,22 @@
 package mypackage;
+
 import java.util.Scanner;
 
-public class typeTeller {
+public class typeTeller 
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 
 		// Variables
 		Scanner in = new Scanner(System.in);
-		String userString = "string"; // string or trash
+		String userString = "string";
 		int userInt = 0;
 		double userDouble = 0.00;
 		
-			// Get "stuff"
+			// Get "stuff", process and display the type
 			System.out.println("Please enter stuff: ");
 			
-				// Process "stuff"
 				if (in.hasNextInt()) // check as int
 				{
 					userInt = in.nextInt();
@@ -25,7 +27,7 @@ public class typeTeller {
 					userDouble = in.nextDouble();
 					System.out.println("You entered a double of: " + userDouble);
 				}
-				else // process as String
+				else // process anything else as String
 				{
 					userString = in.nextLine();
 					System.out.println("You entered a string of: " + userString);
