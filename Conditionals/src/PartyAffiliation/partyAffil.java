@@ -2,9 +2,11 @@ package mypackage;
 
 import java.util.Scanner;
 
-public class partyAffil {
+public class partyAffil 
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		
 		// Variables
 		Scanner in = new Scanner(System.in);
