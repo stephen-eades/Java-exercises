@@ -58,8 +58,7 @@ public class MyInitial
 		{
 		    	for (j = 1; j <= 10; j++) // j <= [number of columns/asterisks in that row]
 		    	{
-				if (j <= 5) // if j, our column variable, is less than 5 we use a space, 
-						// once we are 5 "columns" over we begin using asterisks
+				if (j <= 5) // if j, our column variable, is less than 5 we use a space, once we are 5 "columns" over we begin using asterisks
 			     	{
 					System.out.print(" ");
 			     	}
