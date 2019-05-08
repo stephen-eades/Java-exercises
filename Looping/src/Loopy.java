@@ -1,6 +1,7 @@
 package mypackage;
 
-public class Loopy {
+public class Loopy 
+{
 
 	public static void main(String[] args) 
 	{
