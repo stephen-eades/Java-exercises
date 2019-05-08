@@ -10,7 +10,7 @@ public class MyInitial
 		int i = 0;
 		int j = 0;
 		
-		// 9. Capital letter S of my first name, Stephen. As displayed below.
+		// Capital letter S of my first name, Stephen. As displayed below.
 		// **********
 		// **********
 		// *****
@@ -20,63 +20,67 @@ public class MyInitial
         	// **********
         	// **********
 		
-		// First nested for is top two rows
+		// First nested loop is for top two rows
 		for (i = 1; i <= 2; i++) // i <= [number of rows]
 		{
-		    for (j = 1; j <= 10; j++) // j <= [number of columns/asterisks in that row]
-		    {
-			System.out.print("*");
-		    }
-		    System.out.println(); // breaks each row
+		    	for (j = 1; j <= 10; j++) // j <= [number of columns/asterisks in that row]
+		    	{
+				System.out.print("*");
+		    	}
+		    	System.out.println(); // breaks each row
 		}
 
-			// Second nested for is 3rd row
+		
+		// Second nested loop is for 3rd row
 		for (i = 1; i <= 1; i++) // i <= [number of rows]
 		{
-		    for (j = 1; j <= 5; j++) // j <= [number of columns/asterisks in that row]
-		    {
-			System.out.print("*");
-		    }
-		    System.out.println(); // breaks each row
+		    	for (j = 1; j <= 5; j++) // j <= [number of columns/asterisks in that row]
+		    	{
+				System.out.print("*");
+		    	}
+		    	System.out.println(); // breaks each row
 		}
 
-			// Third nested for is 4th and 5th rows - identical to two top rows
+		
+		// Third nested loop is for 4th and 5th rows
 		for (i = 1; i <= 2; i++) // i <= [number of rows]
 		{
-		    for (j = 1; j <= 10; j++) // j <= [number of columns/asterisks in that row]
-		    {
-			System.out.print("*");
-		    }
-		    System.out.println(); // breaks each row
+		    	for (j = 1; j <= 10; j++) // j <= [number of columns/asterisks in that row]
+		    	{
+				System.out.print("*");
+		    	}
+		    	System.out.println(); // breaks each row
 		}
 
-			// Fourth nested for is for 6th and 7th rows - spaces first then asteriks
+		
+		// Fourth nested loop is for 6th and 7th rows
 		for (i = 1; i <= 1; i++) // i <= [number of rows]
 		{
-		    for (j = 1; j <= 10; j++) // j <= [number of columns/asterisks in that row]
-		    {
-					 if (j <= 5) // if j, our column variable, is less than 5 we use a space, once we are 5 "columns" over we begin using asterisks
-			     {
-						 System.out.print(" ");
-			     }
-			     else
-			     {
-				 System.out.print("*");
-			     }
-		    }
-		    System.out.println(); // breaks each row
+		    	for (j = 1; j <= 10; j++) // j <= [number of columns/asterisks in that row]
+		    	{
+				if (j <= 5) // if j, our column variable, is less than 5 we use a space, 
+						// once we are 5 "columns" over we begin using asterisks
+			     	{
+					System.out.print(" ");
+			     	}
+			     	else
+			     	{
+					System.out.print("*");
+			     	}
+		    	}
+		    	System.out.println(); // breaks each row
 		}
 
-			// Final nested for is bottom two rows to complete our capital S
+		
+		// Final nested loop is for bottom two rows to complete our initial
 		for (i = 1; i <= 2; i++) // i <= [number of rows]
 		{
-		    for (j = 1; j <= 10; j++) // j <= [number of columns/asterisks in that row]
-		    {
-			System.out.print("*");
-		    }
-		    System.out.println(); // breaks each row
+		    	for (j = 1; j <= 10; j++) // j <= [number of columns/asterisks in that row]
+		    	{
+				System.out.print("*");
+		    	}
+		    	System.out.println(); // breaks each row
 		}
 
 	}
-
 }
