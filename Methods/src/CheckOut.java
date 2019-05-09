@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 /**
  * @author Stephen Eades
- * @param args the command line arguments
  */
 public class CheckOut 
 {
