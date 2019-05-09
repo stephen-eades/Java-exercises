@@ -27,17 +27,15 @@ public class GradeBook
        final int ADD_GRADES = 2;      
        final int DISPLAY = 3;
        final int DELETE_GRADE = 4;
-       final int DELETE_STUDENT = 5;
-       final int QUIT = 6;
+       final int QUIT = 5;
  
            // build the menu
            menu = "\n\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
            menu += String.format("\n+++\t1) - %-35s", "Create a Class Set.") + "\t+++";
            menu += String.format("\n+++\t2) - %-35s", "Add Grades to a Set.") + "\t+++";    
            menu += String.format("\n+++\t3) - %-35s", "Display a Class Report.") + "\t+++";    
-           menu += String.format("\n+++\t4) - %-35s", "Delete a Grade.") + "\t+++";    
-           menu += String.format("\n+++\t5) - %-35s", "Edit a Grade.") + "\t+++";    
-           menu += String.format("\n+++\t6) - %-35s", "Quit the Program.") + "\t+++";    
+           menu += String.format("\n+++\t4) - %-35s", "Delete a Grade.") + "\t+++";     
+           menu += String.format("\n+++\t5) - %-35s", "Quit the Program.") + "\t+++";    
            menu += "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
            menu += "\nGet choice";        
        
@@ -68,11 +66,6 @@ public class GradeBook
                case DELETE_GRADE:
                    System.out.println("Delete grade option chosen.");
                    deleteGradeCol();
-                   break;
-                   
-               case DELETE_STUDENT:
-                   System.out.println("Edit Grade option chosen.");
-                   editGrade();
                    break;
                    
                case QUIT:
@@ -148,7 +141,7 @@ public class GradeBook
    }
    
    
-   static void displayClassSet() 
+   private static void displayClassSet() 
    {
 	   String studentRecord = "";
 	   String fileHeader = "";
@@ -203,7 +196,7 @@ public class GradeBook
    }
    
    
-   static String formatRecordDisplay(int studentRecordCount, String studentRecord) 
+   private static String formatRecordDisplay(int studentRecordCount, String studentRecord) 
    {
 	   String ret = "" + studentRecordCount + " " + studentRecord;
 	   String [] recordSplit = studentRecord.split(",");
@@ -253,7 +246,7 @@ public class GradeBook
 
 
 
-static void addGradesToSet() 
+   private static void addGradesToSet() 
    {
 	   String studentRecord = "";
 	   String fileHeader = "";
@@ -349,7 +342,7 @@ static void addGradesToSet()
    } 
 
 
-   static void deleteGradeCol() 
+   private static void deleteGradeCol() 
    {
 	   String studentRecord = "";
 	   String fileHeader = "";
@@ -492,149 +485,4 @@ static void addGradesToSet()
       
    }
 
-   
-   static void editGrade() 
-   {
-	   String studentRecord = "";
-	   String fileHeader = "";
-	   String colHeader = "";
-	   boolean confirmReport = false;
-       File classFile;
-       Scanner inFile;
-       Scanner in = new Scanner (System.in);
-       JFileChooser chooser = new JFileChooser();
-       PrintWriter outFile;
-       ArrayList<String> lines = new ArrayList<>();
-       FileNameExtensionFilter filter = new FileNameExtensionFilter("Class Set File", "txt", "text", "csv");
-       chooser.addChoosableFileFilter(filter);
-       File workingDirectory = new File(System.getProperty("user.dir"));
-       chooser.setCurrentDirectory(workingDirectory);
-       
-       int studentRecordCount = 0;
-       int curGrade = 0;
-       int lowGrade = 0;
-       int highGrade = 100;
-       
-       try
-       {
-    	   if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
-    	   {
-    		   classFile = chooser.getSelectedFile();
-    		   inFile = new Scanner(classFile);
-    		   fileHeader = inFile.nextLine(); 
-    		   
-    		   // loop and get names into ArrayList
-    		   System.out.println(fileHeader);
-    		   
-    		   System.out.println("============================================");
-    		   while(inFile.hasNextLine())
-    		   {
-    			   studentRecord = inFile.nextLine();
-    			   studentRecordCount++;
-    			   lines.add(studentRecord);
-    			   // System.out.println(studentRecordCount + " " + studentRecord);
-    			   System.out.println(formatRecordDisplay(studentRecordCount, studentRecord));
-    		   }
-    		   System.out.println("============================================");
-
-    		   inFile.close();
-    		   
-    		   // confirm the teacher selected to correct class
-    		   confirmReport = SafeInput.getYNConfirm(in, "Is this the class you'd like to edit a grade from");
-    		   if (confirmReport == true)
-    		   {
-    			   // get delete choice
-    			   String cols [] = fileHeader.split(",");
-    			   int colToDelete = SafeInput.getRangedInt(in, "Which grades do you want to edit?" + "[1-" + (cols.length-1) + "]", 0, cols.length-1);
-    			   
-    			   // confirm delete choice
-    			   if (!SafeInput.getYNConfirmB(in, "Are you sure you want to edit" + cols[colToDelete]))
-    			   {
-    				   System.out.println("Returning to menu...");
-    				   return;
-    			   }
-    			   
-    			   lines.add(0, fileHeader);
-    			   
-    			   // loop and add each line into its own ArrayList
-	    		   outFile = new PrintWriter(classFile);
-	    		   ArrayList<String> curLine = new ArrayList<>();
-	    		   String formedLine = "";
-	    		   
-	    		   for (String li : lines)
-	    		   {
-	    			   curLine.clear();
-	    			   cols = li.split(",");
-	    			   for (int col = 0; col < cols.length; col++)
-	    			   {
-	    				   if (col != colToDelete)
-	    				   {
-	    					   curLine.add(cols[col]);
-	    				   }
-	    			   }
-	    			   
-	    			   formedLine = ""; // clear out formed line for each iteration
-	    			   
-	    			   for (int col = 0; col < curLine.size(); col++)
-	    			   {
-	    				   formedLine += curLine.get(col);
-	    				   if (col != curLine.size() - 1)
-	    				   {
-	    					   int index = SafeInput.getRangedInt(in, "Enter grade for: " + lines.get(col), 0, 100);
-	    	    			   lines.set(col, lines.get(col) + ", " + curGrade);
-	    				   }
-	    			   }
-	    			   outFile.println(formedLine);
-
-	    		   }
-    		       outFile.close();
-    		       
-        		   inFile = new Scanner(classFile);
-        		   fileHeader = inFile.nextLine(); 
-        		   
-        		   // loop and get names into ArrayList
-        		   System.out.println(fileHeader);
-        		   
-        		   System.out.println("============================================");
-        		   while(inFile.hasNextLine())
-        		   {
-        			   studentRecord = inFile.nextLine();
-        			   studentRecordCount++;
-        			   lines.add(studentRecord);
-        			   // System.out.println(studentRecordCount + " " + studentRecord);
-        			   System.out.println(formatRecordDisplay(studentRecordCount, studentRecord));
-        		   }
-        		   System.out.println("============================================");
-
-        		   inFile.close();
-    		       
-    		   }
-    		   else
-    		   {
-    			   System.out.println("Returning to menu...");
-    			   return;
-    		   }
-    		   
-    	   }
-    	   else
-    	   {
-    		   System.out.println("You must choose a file. \nReturning to menu...");
-    		   in.close();
-    		   return;
-    	   }
-    	   
-       } 
-       catch (FileNotFoundException ex) 
-       {
-    	   System.out.println("Error, could not create output file! Terminating the system.");
-    	   System.exit(0);
-       } 
-       catch (IOException ex) 
-       {
-    	   ex.getStackTrace();
-    	   System.exit(0);
-       } 
-      
-   }
-   
 }
