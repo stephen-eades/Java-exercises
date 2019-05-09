@@ -1,16 +1,15 @@
 package mypackage;
+
 import java.util.Scanner;
 
 /**
-*
 * @author eadess
 */
-public class PrettyHeader {
-
-    /**
-     * @param args the command line arguments
-     */
-	public static void main(String[] args) {
+public class PrettyHeader 
+{
+	
+	public static void main(String[] args) 
+	{
 
 		// Variables
 		Scanner in = new Scanner(System.in);
