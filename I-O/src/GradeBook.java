@@ -255,34 +255,40 @@ public class GradeBook
 	
    	}
 
-////////BOOKMARK/////////
-
-   private static void addGradesToSet() 
-   {
-	   String studentRecord = "";
-	   String fileHeader = "";
-	   String colHeader = "";
-	   boolean confirmReport = false;
-       File classFile;
-       Scanner inFile;
-       Scanner in = new Scanner (System.in);
-       JFileChooser chooser = new JFileChooser();
-       PrintWriter outFile;
-       int studentRecordCount = 0;
-       int curGrade = 0;
-       ArrayList<String> names = new ArrayList<>();
-       FileNameExtensionFilter filter = new FileNameExtensionFilter("Class Set File", "txt", "text", "csv");
-       chooser.addChoosableFileFilter(filter);
-       File workingDirectory = new File(System.getProperty("user.dir"));
-       chooser.setCurrentDirectory(workingDirectory);
+///////////////////////////////////////	
+///////////////BOOKMARK////////////////
+///////////////////////////////////////	
+	
+   	/**   
+	* Adds grades to a class set
+	*/	
+   	private static void addGradesToSet() 
+   	{
+		// Variables
+	   	String studentRecord = "";
+	   	String fileHeader = "";
+	   	String colHeader = "";
+	   	boolean confirmReport = false;
+       		File classFile;
+       		Scanner inFile;
+       		Scanner in = new Scanner (System.in);
+       		JFileChooser chooser = new JFileChooser();
+       		PrintWriter outFile;
+       		int studentRecordCount = 0;
+       		int curGrade = 0;
+       		ArrayList<String> names = new ArrayList<>();
+       		FileNameExtensionFilter filter = new FileNameExtensionFilter("Class Set File", "txt", "text", "csv");
+       		chooser.addChoosableFileFilter(filter);
+       		File workingDirectory = new File(System.getProperty("user.dir"));
+       		chooser.setCurrentDirectory(workingDirectory);
        
-       try
-       {
-    	   if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
-    	   {
-    		   classFile = chooser.getSelectedFile();
-    		   inFile = new Scanner(classFile);
-    		   fileHeader = inFile.nextLine(); 
+       		try
+       		{
+    	   		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+    	   		{
+    		   		classFile = chooser.getSelectedFile();
+    		   		inFile = new Scanner(classFile);
+    		   		fileHeader = inFile.nextLine(); 
     		   
     		   // loop and get names into ArrayList
     		   System.out.println(fileHeader);
