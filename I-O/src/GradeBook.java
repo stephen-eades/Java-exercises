@@ -6,91 +6,90 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
  
 /**
-*
 * @author Stephen Eades
 */
 public class GradeBook 
 {
-
-   /**
-    * @param args the command line arguments
-    */
-   public static void main(String[] args) 
-   {
-       boolean finished = false;
-       Scanner console = new Scanner(System.in);
-       String menu = "";
-       int low = 1;
-       int high = 6;
-       int menuChoice = 0;
-       final int CREATE = 1;  
-       final int ADD_GRADES = 2;      
-       final int DISPLAY = 3;
-       final int DELETE_GRADE = 4;
-       final int QUIT = 5;
- 
-           // build the menu
-           menu = "\n\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
-           menu += String.format("\n+++\t1) - %-35s", "Create a Class Set.") + "\t+++";
-           menu += String.format("\n+++\t2) - %-35s", "Add Grades to a Set.") + "\t+++";    
-           menu += String.format("\n+++\t3) - %-35s", "Display a Class Report.") + "\t+++";    
-           menu += String.format("\n+++\t4) - %-35s", "Delete a Grade.") + "\t+++";     
-           menu += String.format("\n+++\t5) - %-35s", "Quit the Program.") + "\t+++";    
-           menu += "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
-           menu += "\nGet choice";        
+	
+   	public static void main(String[] args) 
+   	{
+		
+	   	// Variables
+	   	boolean finished = false;
+	   	Scanner console = new Scanner(System.in);
+	   	String menu = "";
+       		int low = 1;
+       		int high = 6;
+       		int menuChoice = 0;
+       		final int CREATE = 1;  
+       		final int ADD_GRADES = 2;      
+       		final int DISPLAY = 3;
+       		final int DELETE_GRADE = 4;
+       		final int QUIT = 5;
+		
+		  	// build the menu
+		   	menu = "\n\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+		   	menu += String.format("\n+++\t1) - %-35s", "Create a Class Set.") + "\t+++";
+		   	menu += String.format("\n+++\t2) - %-35s", "Add Grades to a Set.") + "\t+++";    
+		   	menu += String.format("\n+++\t3) - %-35s", "Display a Class Report.") + "\t+++";    
+		   	menu += String.format("\n+++\t4) - %-35s", "Delete a Grade.") + "\t+++";     
+		   	menu += String.format("\n+++\t5) - %-35s", "Quit the Program.") + "\t+++";    
+		   	menu += "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
+		   	menu += "\nGet choice";
        
-       
-       do
-       {
+		
+			do
+			{
+				// Display menu and get choice
+				menuChoice = SafeInput.getRangedInt(console, menu, low, high);
+				switch (menuChoice)
+				{
+						
+				case CREATE:
+					System.out.println("Create option chosen.");
+					createClassSet();
+					break;
 
-           // display menu
-           // get the choice
-           menuChoice = SafeInput.getRangedInt(console, menu, low, high);
-           // execute the choice
-           switch (menuChoice)
-           {
-               case CREATE:
-                   System.out.println("Create option chosen.");
-                   createClassSet();
-                   break;
-                   
-               case ADD_GRADES:
-                   System.out.println("Add Grades option chosen.");
-                   addGradesToSet();
-                   break;
-                   
-               case DISPLAY:
-                   displayClassSet();
-                   break;
-                   
-               case DELETE_GRADE:
-                   System.out.println("Delete grade option chosen.");
-                   deleteGradeCol();
-                   break;
-                   
-               case QUIT:
-                   System.out.println("Thanks for using the Grade Book.");
-                   System.exit(0);
-                   
-               default:
-                   System.out.println("Error unknown menu choice!");
-                   System.exit(0);
-           }
-           
-       } while(!finished);
-   }
+			       	case ADD_GRADES:
+				   	System.out.println("Add Grades option chosen.");
+				   	addGradesToSet();
+				   	break;
+
+			       	case DISPLAY:
+				   	displayClassSet();
+				   	break;
+
+			       	case DELETE_GRADE:
+				   	System.out.println("Delete grade option chosen.");
+				   	deleteGradeCol();
+				   	break;
+
+			       	case QUIT:
+				   	System.out.println("Thanks for using the Grade Book.");
+				   	System.exit(0);
+
+			       	default:
+				   	System.out.println("Error unknown menu choice!");
+				   	System.exit(0);
+				}
+
+			} while(!finished);
+		
+	}
    
    
-   
-   private static void createClassSet() 
-   {
-       String classFileName = "";
-       String studentName = "";
-       boolean doneNameInput = false;
-       File classFile;
-       PrintWriter out;
-       Scanner in = new Scanner (System.in);
-       ArrayList<String> names = new ArrayList<>();
+//////////////////////////////////////////
+/////////////////BOOKMAR/K////////////////
+//////////////////////////////////////////	
+	private static void createClassSet() 
+   	{
+       		String classFileName = "";
+       		String studentName = "";
+       		boolean doneNameInput = false;
+       		File classFile;
+       		PrintWriter out;
+       		Scanner in = new Scanner (System.in);
+       		ArrayList<String> names = new ArrayList<>();
        
        System.out.print("Enter the name of the class file [1st grade math]: ");
        classFileName = in.nextLine();
