@@ -27,7 +27,7 @@ public class GradeBook
        		final int DELETE_GRADE = 4;
        		final int QUIT = 5;
 		
-		  	// build the menu
+		  	// Build the menu
 		   	menu = "\n\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
 		   	menu += String.format("\n+++\t1) - %-35s", "Create a Class Set.") + "\t+++";
 		   	menu += String.format("\n+++\t2) - %-35s", "Add Grades to a Set.") + "\t+++";    
@@ -77,123 +77,128 @@ public class GradeBook
 		
 	}
    
-   
-//////////////////////////////////////////
-/////////////////BOOKMAR/K////////////////
-//////////////////////////////////////////	
+	
+   	/**
+	* Allows the user to create a class set and add student names
+	*/
 	private static void createClassSet() 
    	{
+		
+		// Variables
+		File classFile;
+       		PrintWriter out;
        		String classFileName = "";
        		String studentName = "";
        		boolean doneNameInput = false;
-       		File classFile;
-       		PrintWriter out;
        		Scanner in = new Scanner (System.in);
        		ArrayList<String> names = new ArrayList<>();
        
-       System.out.print("Enter the name of the class file [1st grade math]: ");
-       classFileName = in.nextLine();
+			// Name the class set
+			System.out.print("Enter the name of the class file [1st grade math]: ");
+			classFileName = in.nextLine();
        
-       try
-       {
-    	   // loop and get the student names into an ArrayList
-    	   do 
-    	   {
-    		   System.out.print("Enter the student name [First Last]: ");
-    		   studentName = in.nextLine();
-    		   names.add(studentName);
-    		   
-    		   // prompt the user to continue
-    		   if (!SafeInput.getYNConfirm(in, "Enter another student"))
-    		   {
-    			   doneNameInput = true;
-    		   }
-    		   
-    	   } while (!doneNameInput);
-    	 
-    	   classFile = new File(classFileName + ".txt");
-    	   out = new PrintWriter(classFile);
-    	   
-    	   // write the header (this header is read into the addGrades method)
-    	   out.println(classFileName);
-    	   // write student name to file
-    	   for (String nm : names)
-    	   {
-    		   out.println(nm);
-    	   }
-    	   
-    	   // close the file
-    	   out.close();
-    	   
-       } 
-       catch (FileNotFoundException ex) 
-       {
-    	   System.out.println("Error, could not create output file!");
-    	   System.exit(0);
-       } 
-       catch (IOException ex) 
-       {
-    	   ex.getStackTrace();
-    	   System.exit(0);
-       } 
-       
-   }
-   
-   
-   private static void displayClassSet() 
-   {
-	   String studentRecord = "";
-	   String fileHeader = "";
-       File classFile;
-       Scanner inFile;
-       JFileChooser chooser = new JFileChooser();
-       int studentRecordCount = 0;
-       File workingDirectory = new File(System.getProperty("user.dir"));
-       chooser.setCurrentDirectory(workingDirectory);
-       
-       try
-       {
-    	   if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
-    	   {
-    		   classFile = chooser.getSelectedFile();
-    		   inFile = new Scanner(classFile);
-    		   fileHeader = inFile.nextLine();
-    		   
-    		   // loop and get names into ArrayList
-    		   System.out.println(fileHeader);
-    		   System.out.println("============================================");
-    		   while(inFile.hasNextLine())
-    		   {
-    			   studentRecord = inFile.nextLine();
-    			   studentRecordCount++;
-    			   //System.out.println(studentRecordCount + " " + studentRecord);
-    			   System.out.println(formatRecordDisplay(studentRecordCount, studentRecord));
-    		   }
-    		   System.out.println("============================================");
+		       	try
+		       	{
+			   	do 
+			   	{
+					// Loop and get the student names, then prompt to add another student
+				   	System.out.print("Enter the student name [First Last]: ");
+				   	studentName = in.nextLine();
+				   	names.add(studentName);
+					
+				   	if (!SafeInput.getYNConfirm(in, "Enter another student"))
+				   	{
+					   	doneNameInput = true;
+				   	}
 
-    		   inFile.close();
-    	   }
-    	   else
-    	   {
-    		   System.out.println("You must choose a file. \nReturning to menu...");
-    		   return;
-    	   }
+			   	} while (!doneNameInput);
+
+				// Create the file in directory
+				classFile = new File(classFileName + ".txt");
+				out = new PrintWriter(classFile);
+
+				// Write the header and student names, then close the file
+				out.println(classFileName);
+				for (String nm : names)
+				{
+				   	out.println(nm);
+				}
+				out.close();
+				
+		       } 
+		       catch (FileNotFoundException ex) 
+		       {
+			   	System.out.println("Error, could not create output file!");
+			   	System.exit(0);
+		       } 
+		       catch (IOException ex) 
+		       {
+			   	ex.getStackTrace();
+			   	System.exit(0);
+		       } 
+		
+	}
+   
+
+	/**   
+	* Allows the user to display their class set
+	*/	
+   	private static void displayClassSet() 
+   	{
+		
+		// Variables
+	   	String studentRecord = "";
+	  	String fileHeader = "";
+       		File classFile;
+       		Scanner inFile;
+       		JFileChooser chooser = new JFileChooser();
+       		int studentRecordCount = 0;
+       		File workingDirectory = new File(System.getProperty("user.dir"));
+       		chooser.setCurrentDirectory(workingDirectory);
+       
+       			try
+       			{
+    	   			if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+    	   			{
+					// User chooses file to display
+				   	classFile = chooser.getSelectedFile();
+				   	inFile = new Scanner(classFile);
+				   	fileHeader = inFile.nextLine();
+    		   
+    		   			// Loop through file and get each student name, format and display before closing file
+    		   			System.out.println(fileHeader);
+    		   			System.out.println("============================================");
+    		   			while(inFile.hasNextLine())
+    		   			{
+    			   			studentRecord = inFile.nextLine();
+    			   			studentRecordCount++;
+    			   			System.out.println(formatRecordDisplay(studentRecordCount, studentRecord));
+    		   			}
+    		   			System.out.println("============================================");
+    		   			inFile.close();
+    	   			}
+    	   			else
+    	   			{
+    		   			System.out.println("You must choose a file. \nReturning to menu...");
+    		   			return;
+    	   			}
 
     	   
-       } 
-       catch (FileNotFoundException ex) 
-       {
-    	   System.out.println("Error, could not create output file!");
-    	   System.exit(0);
-       } 
-       catch (IOException ex) 
-       {
-    	   ex.getStackTrace();
-    	   System.exit(0);
-       } 
+		       	} 
+		       	catch (FileNotFoundException ex) 
+		       	{
+			   	System.out.println("Error, could not create output file!");
+			   	System.exit(0);
+		       	} 
+		       	catch (IOException ex) 
+		       	{
+			   	ex.getStackTrace();
+			   	System.exit(0);
+		       	} 
 	   
-   }
+   	}
    
+	
    
    private static String formatRecordDisplay(int studentRecordCount, String studentRecord) 
    {
