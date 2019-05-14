@@ -2,34 +2,31 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-// Class
 public class Quidditch 
 {
 
-	// Class variables	
+	// Variables	
 	static int teamA = 0;
 	static int teamB = 1;
 	static int teamAScore = 0;
 	static int teamBScore = 0;
 	static int teamATotal = 0;
 	static int teamBTotal= 0;
+	static int quarterScore[] = new int[2];
+	static int overtimeScore[] = new int[2];
+	static ArrayList<String> teams = new ArrayList<String>();
 	static boolean snitchCaught = false;
 	static boolean playAgainYN = false;
-	static ArrayList<String> teams = new ArrayList<String>();
-	static int quarterScore[] = new int[2]; // initialize arrayList
-	static int overtimeScore[] = new int[2]; // initialize arrayList
 	static Random rand = new Random();
 	static Scanner pipe = new Scanner(System.in);
-	
-		// Main Method
+
 		public static void main(String[] args) 
-		{
-	
+		{	
 			
-			do 
+			do  
 			{ // playAgain loop
 			
-				// Variables
+				// Add teams to ArrayList index
 				teams.add("Wizards"); // 1
 				teams.add("Dragons"); // 2
 				teams.add("Witches"); // 3
@@ -39,76 +36,71 @@ public class Quidditch
 				teams.add("Snakes"); // 7
 				teams.add("Goblins"); // 8
 				
-					// Introduction message, welcoming the user to the tournament. Explain rules of Quidditch.
-					// display all team names with (print teams *use whatever method to print out all teams in array)
+					// Introduction message - Explain rules and display teams
 					System.out.println("Welcome to the Quidditch tournament!");
-					System.out.println("They're a total of 8 teams in the tournament, with 0-40 points a quarter. The last team remaining "
-							+ "is the crowned champion.\n");
-					System.out.println("Round #1\r\n" + 
-							"======================================" + 
-							"");
-					
+					System.out.println("They're a total of 8 teams in the tournament," 
+							+ " with 0-40 points a quarter. The last team remaining"
+							+ " is the crowned champion.\n");
 				
-						// loop for first round - run 4 times, this will reduce arrayList to only 4 teams
+						
+						// First round loop - this will reduce ArrayList to 4 teams
+						System.out.println("Round #1\r\n" 
+							+ "======================================" + "");
 						for (int j = 0; j < 4; j++)
 						{
-							// playGame method and change teams playing by adding 2
+							// Cycle teams by adding 1 to index value each iteration
 							playGame(teamA, teamB, teams);
 							teamA = teamA + 1;
 							teamB = teamB + 1;
-				
-						} // end first round loop
+						}
 							
-							// output results and reset variables
-							System.out.println("   " + "Remaining teams after round 1: ");
-							for (int m = 0; m < 4; m++)
-							{
-								System.out.println("   " + teams.get(m));
-							}
-							teamA = 0;
-							teamB = 1;
-							System.out.println("");
+						// Output results and reset variables
+						System.out.println("   " + "Remaining teams after round 1: ");
+						for (int m = 0; m < 4; m++)
+						{
+							System.out.println("   " + teams.get(m));
+						}
+						teamA = 0;
+						teamB = 1;
+						System.out.println("");
 						
-						System.out.println("Round #2\r\n" + 
-								"======================================" + 
-								"");	
-						// loop for second round  - run 2 times, this will reduce arrayList to only 2 teams
+				
+						// Second round loop - this will reduce ArrayList to 2 teams
+						System.out.println("Round #2\r\n" 
+							+ "======================================" + "");	
 						for (int j = 0; j < 2; j++)
 						{
-							// playGame method and change teams playing by adding 2
+							// Cycle teams by adding 1 to index value each iteration
 							playGame(teamA, teamB, teams);
 							teamA = teamA + 1;
 							teamB = teamB + 1;
-				
-						} // end second round loop
+						}
 							
-							// output results and reset variables
-							System.out.println("   " + "Remaining teams after round 2: ");
-							for (int m = 0; m < 2; m++)
-							{
-								System.out.println("   " + teams.get(m));
-							}
-							teamA = 0;
-							teamB = 1;
-							System.out.println("");
+						// output results and reset variables
+						System.out.println("   " + "Remaining teams after round 2: ");
+						for (int m = 0; m < 2; m++)
+						{
+							System.out.println("   " + teams.get(m));
+						}
+						teamA = 0;
+						teamB = 1;
+						System.out.println("");
 	
-						System.out.println("Championship Round\r\n" + 
-								"======================================" + 
-								"");
-						// play championship round using playGame method
+				
+						// Championship round - one team remaining in ArrayList
+						System.out.println("Championship Round\r\n" 
+							+ "======================================" + "");	
 						playGame(teamA, teamB, teams);
 				
 						// Show champion and clear arrayList for next round
 						System.out.println("The champion of the tournament is " + teams.get(0));
 						teams.remove(0);
-						
-							// play again
-							String prompt = ("Would you like to play again?: [Y/N] ");
-							playAgainYN = SafeInput.getYNConfirm(pipe, prompt);
+						String prompt = ("Would you like to play again?: [Y/N] ");
+						playAgainYN = SafeInput.getYNConfirm(pipe, prompt);
 				
-			} while (playAgainYN == true); // end playAgain loop
+			} while (playAgainYN == true);
 			
-		} // end main
+		}
 
 
 
