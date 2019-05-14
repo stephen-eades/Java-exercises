@@ -104,162 +104,157 @@ public class Quidditch
 
 
 
-	/*
-	 * Helper Methods
-	 * 
-	 * 
-	    * 
-	    * @param int teamA = the index for the first team 
-	    * @param int teamB = the index for the second team
-	    * @param ArrayList teams = array containing each team
-	    */ 
-		public static void playGame (int teamA, int teamB, ArrayList<String> teams) 
-		{
+	/** 
+	* @param int teamA = the index for the first team 
+    	* @param int teamB = the index for the second team
+    	* @param ArrayList teams = array containing each team
+    	*/ 
+	public static void playGame (int teamA, int teamB, ArrayList<String> teams) 
+	{
+		
+		// variables
+		int i = 0;
+		int quarterCount = 0;
+		int overtimeCount = 0;
 			
-			// variables for method
-			int i = 0;
-			int quarterCount = 0;
-			int overtimeCount = 0;
-			
-				// game statement
-				System.out.println("   " + teams.get(teamA) + " vs " + teams.get(teamB));
-				System.out.println("   " + "-------------------------");
-					// method for quarter (loop 4 times)
-					for (i = 0; i < 4; i++)
-					{
-						// play the quarter and store to a var
-						quarterScore = playQuarter();
-						quarterCount++;
-						
-							// check if the snitch was caught each quarter
-							if (snitchCaught == true)
-							{
-								// determine the winner
-								System.out.println("   " + "The game is over. The winner is...");
-								// Randomly choose
-								int generate = rand.nextInt(2);		
-								
-									if (generate == 0)
-									{
-										System.out.println("   " + "The " + teams.get(teamA) + "! " + teams.get(teamB) + " are eliminated");
-										teams.remove(teamB); // remove the losing team
-										break;
-									}
-									else if (generate == 1)
-									{
-										System.out.println("   " + "The " + teams.get(teamB) + "! " + teams.get(teamA) + " are eliminated");
-										teams.remove(teamA); // remove the losing team
-										break; // end the game loop
-									}
-									
-							} // end snitchCaught block
-						
-						// set returned array with scores to each team
-						teamAScore = quarterScore[0];
-						teamBScore = quarterScore[1];
-						System.out.println("   " + "Qtr " + quarterCount + ": " + teamAScore + "   " + teamBScore);
-						
-						// add quarter score to total for each team
-						teamATotal = teamATotal + teamAScore;
-						teamBTotal = teamBTotal + teamBScore;
-						
-						
-					}
-					quarterCount = 0;
-					
-					// if statement to check for overtime (if teamATotal == teamBTotal)
-					if (snitchCaught == false && teamATotal == teamBTotal)
-					{
-						do
+			// Game statement
+			System.out.println("   " + teams.get(teamA) + " vs " + teams.get(teamB));
+			System.out.println("   " + "-------------------------");
+
+			// Play 4 quarters
+			for (i = 0; i < 4; i++)
+			{
+				// Store quarter points in var
+				quarterScore = playQuarter();
+				quarterCount++;
+
+				// Check for snitch
+				if (snitchCaught == true)
+				{
+					// Randomely determine the winner
+					System.out.println("   " + "The game is over. The winner is...");
+					int generate = rand.nextInt(2);		
+
+						if (generate == 0)
 						{
-							overtimeScore = playQuarter();
-							overtimeCount++;
-							teamATotal = teamATotal + overtimeScore[0];
-							teamBTotal = teamBTotal + overtimeScore[1];
-							System.out.println("   " + "OT " + overtimeCount + ": " + teamATotal + "   " + teamBTotal);
-						} 
-						while (teamATotal == teamBTotal);
-					}
-					
-					
-					// determine our winner (after overtime)
-					if (snitchCaught == false)
-					{
-						// determine winning and losing team if snitchCaught == false
-						if (teamATotal > teamBTotal)
-						{
-							System.out.println("   " + teams.get(teamA) + " win " + teamATotal + " to " + teamBTotal + ". The " + teams.get(teamB) 
-							+ " are eliminated.");
+							System.out.println("   " + "The " + teams.get(teamA) + "! " + teams.get(teamB) + " are eliminated");
 							teams.remove(teamB);
+							break;
 						}
-						else if (teamATotal < teamBTotal)
+						else if (generate == 1)
 						{
-							System.out.println("   " + teams.get(teamB) + " win " + teamBTotal + " to " + teamATotal + ". The " + teams.get(teamA) 
-							+ " are eliminated.");
+							System.out.println("   " + "The " + teams.get(teamB) + "! " + teams.get(teamA) + " are eliminated");
 							teams.remove(teamA);
+							break;
 						}
-					}
-				
-								
-					System.out.println("   " + "-------------------------"); // padding for end of each game
-					
-			// reset variables for next game		
-			teamAScore = 0;
-			teamBScore = 0;
-			teamATotal = 0;
-			teamBTotal = 0;
-		} // end game 
+
+				}
+
+				// Display each teams score for the quarter
+				teamAScore = quarterScore[0];
+				teamBScore = quarterScore[1];
+				System.out.println("   " + "Qtr " + quarterCount + ": " + teamAScore + "   " + teamBScore);
+
+				// Total each teams points for final score
+				teamATotal = teamATotal + teamAScore;
+				teamBTotal = teamBTotal + teamBScore;
+
+			} // End of 4 quarters
+			quarterCount = 0;
+
+
+			// Check for overtime
+			if (snitchCaught == false && teamATotal == teamBTotal)
+			{
+				do
+				{
+					// Play overtime
+					overtimeScore = playQuarter();
+					overtimeCount++;
+					teamATotal = teamATotal + overtimeScore[0];
+					teamBTotal = teamBTotal + overtimeScore[1];
+					System.out.println("   " + "OT " + overtimeCount + ": " + teamATotal + "   " + teamBTotal);
+				} 
+				while (teamATotal == teamBTotal);
+			}
+
+
+			// Determine winner
+			if (snitchCaught == false)
+			{
+				// Determine winning and losing team
+				if (teamATotal > teamBTotal)
+				{
+					System.out.println("   " + teams.get(teamA) + " win " + teamATotal + " to " + teamBTotal + ". The " + teams.get(teamB) 
+					+ " are eliminated.");
+					teams.remove(teamB);
+				}
+				else if (teamATotal < teamBTotal)
+				{
+					System.out.println("   " + teams.get(teamB) + " win " + teamBTotal + " to " + teamATotal + ". The " + teams.get(teamA) 
+					+ " are eliminated.");
+					teams.remove(teamA);
+				}
+			}
+
+			 // Padding for end of each game
+			System.out.println("   " + "-------------------------");
+
+		// reset variables for next game		
+		teamAScore = 0;
+		teamBScore = 0;
+		teamATotal = 0;
+		teamBTotal = 0;
 		
+	} // end game 
 		
-	/*
-	 * 
-	    * @return quarterScore = array with two values for each teams score in the quarter
-	    */ 
-		public static int[] playQuarter () 
-		{
-			
-			// Variables
-			int quarterPoints[] = new int[2]; // initialize array
-			
-				// generate each teams score
-				quarterPoints[0] = rand.nextInt(40); // generate random score for teamA
-				quarterPoints[1] = rand.nextInt(40); // generate random score for teamB
-			
-				// method for catching golden Snitch
-				snitchCaught = catchSnitch();
-				
-					// if statement that will determine if the snitch was caught above or not
-					if (snitchCaught == true)
-					{
-						System.out.println("   " + "The snitch has been caught!");
-					}
-			
-			return quarterPoints; // returns an array with two values, the score of teamA and teamB in the quarter
-		}
-		
-		
-	/*
-	 * 
-	    * @return snitchTrueFalse
-	    */ 
-		public static boolean catchSnitch () 
-		{
-			
-			// Variables
-			boolean snitchValue = false;
-			int snitchChance = 0;
-			
-				// generate number 1-100
-				snitchChance = rand.nextInt(100);
-				
-					// if statement - for if the snitch is caught or not
-					if (snitchChance > 0 && snitchChance <= 15)
-					{
-						snitchValue = true; // the snitch was caught! return true
-					}
-			
-			return snitchValue; // the snitch was not caught
-		}
+
 	
+	/** 
+	* @return quarterScore = array with each teams score that quarter
+	*/ 
+	public static int[] playQuarter () 
+	{
+		
+		// Variables
+		int quarterPoints[] = new int[2];
+
+			// Generate each teams score
+			quarterPoints[0] = rand.nextInt(40);
+			quarterPoints[1] = rand.nextInt(40);
+
+			// Catch snitch method
+			snitchCaught = catchSnitch();
+
+			if (snitchCaught == true)
+			{
+				System.out.println("   " + "The snitch has been caught!");
+			}
+		
+		return quarterPoints; // returns an array with two values, the score of teamA and teamB in the quarter
+	}
+		
+		
+	/** 
+	* @return snitchValue = if the snitch was caught or not
+	*/ 
+	public static boolean catchSnitch () 
+	{
+
+		// Variables
+		boolean snitchValue = false;
+		int snitchChance = 0;
+
+			// Generate number 1-100
+			snitchChance = rand.nextInt(100);
+
+			// If number is in [0-15] range, we return that it was caught
+			if (snitchChance > 0 && snitchChance <= 15)
+			{
+				snitchValue = true;
+			}
+
+		return snitchValue;
+	}
 
 }
