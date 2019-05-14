@@ -37,7 +37,6 @@ public class GradeBook
 		   	menu += "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++";
 		   	menu += "\nGet choice";
        
-		
 			do
 			{
 				// Display menu and get choice
@@ -199,56 +198,64 @@ public class GradeBook
    	}
    
 	
-   
-   private static String formatRecordDisplay(int studentRecordCount, String studentRecord) 
-   {
-	   String ret = "" + studentRecordCount + " " + studentRecord;
-	   String [] recordSplit = studentRecord.split(",");
+   	/**   
+	* Formats the display of student records, used in displayClassSet() method
+	* @param studentRecordCount the number of students
+	* @param studentRecord the student associated with that record
+	*/	
+   	private static String formatRecordDisplay(int studentRecordCount, String studentRecord) 
+   	{
+		
+		// Provide format and split on comma in String Array
+	   	String ret = "" + studentRecordCount + " " + studentRecord;
+	   	String [] recordSplit = studentRecord.split(",");
 	   
-	   if (recordSplit.length > 1)
-	   {
-		   // find min
-		   int min = 100;
-		   for (int m = 1; m < recordSplit.length; m++)
-		   {
-			   int tempMinInt = Integer.parseInt(recordSplit[m].trim());
-			   if ( tempMinInt <= min )
-			   {
-				   min = tempMinInt;
-			   }
-
-		   } 
-		   studentRecord += "\tMin: " + min;
+	   	if (recordSplit.length > 1)
+	   	{
+		   	// Find minimum and add to studentRecord var
+		   	int min = 100;
+		   	for (int m = 1; m < recordSplit.length; m++)
+		   	{
+			   	int tempMinInt = Integer.parseInt(recordSplit[m].trim());
+			   	if ( tempMinInt <= min )
+			   	{
+				   	min = tempMinInt;
+			   	}
+				
+		   	} 
+		   	studentRecord += "\tMin: " + min;
 		   
-		   // find max
-		   int max = 0;
-		   for (int mx = 1; mx < recordSplit.length; mx++)
-		   {
-			   int tempMaxInt = Integer.parseInt(recordSplit[mx].trim());
-			   if ( tempMaxInt >= max )
-			   {
-				   max = tempMaxInt;
-			   }
-		   } 
-		   studentRecord += "\tMax: " + max;
+			
+		   	// Find maximum and add to studentRecord var
+		   	int max = 0;
+		   	for (int mx = 1; mx < recordSplit.length; mx++)
+		   	{
+			   	int tempMaxInt = Integer.parseInt(recordSplit[mx].trim());
+			   	if ( tempMaxInt >= max )
+			   	{
+				   	max = tempMaxInt;
+			   	}
+		   	} 
+		   	studentRecord += "\tMax: " + max;
 		   
-		   // find average
-		   int sum = 0;
-		   for (int i=1; i < recordSplit.length; i++)
-		   {
-			   sum += Integer.parseInt(recordSplit[i].trim()); // parse and add grades to get the sum
-		   }
-		   // find stats
-		   double ave = sum / (recordSplit.length - 1); // subtract one so we don't take the name in, only the grades
-		   studentRecord += "\tAverage Grade: " + ave;
+			
+		   	// Find average and add to studentRecord var
+		   	int sum = 0;
+		   	for (int i=1; i < recordSplit.length; i++)
+		   	{
+			   	sum += Integer.parseInt(recordSplit[i].trim());
+		   	}
+		   	// Subtract one so we don't take the name in, only the grades
+		   	double ave = sum / (recordSplit.length - 1);
+		   	studentRecord += "\tAverage Grade: " + ave;
 		   
-	   }
+	   	}
 	   
-	return studentRecord;
+	    return studentRecord;
 	
-   }
+   	}
 
-
+////////BOOKMARK/////////
 
    private static void addGradesToSet() 
    {
