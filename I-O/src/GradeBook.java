@@ -255,9 +255,6 @@ public class GradeBook
 	
    	}
 
-///////////////////////////////////////	
-///////////////BOOKMARK////////////////
-///////////////////////////////////////	
 	
    	/**   
 	* Adds grades to a class set
@@ -269,13 +266,15 @@ public class GradeBook
 	   	String fileHeader = "";
 	   	String colHeader = "";
 	   	boolean confirmReport = false;
-       		File classFile;
+		int studentRecordCount = 0;
+       		int curGrade = 0;
+		
+		// For I/O
+		File classFile;
        		Scanner inFile;
        		Scanner in = new Scanner (System.in);
-       		JFileChooser chooser = new JFileChooser();
+		JFileChooser chooser = new JFileChooser();
        		PrintWriter outFile;
-       		int studentRecordCount = 0;
-       		int curGrade = 0;
        		ArrayList<String> names = new ArrayList<>();
        		FileNameExtensionFilter filter = new FileNameExtensionFilter("Class Set File", "txt", "text", "csv");
        		chooser.addChoosableFileFilter(filter);
@@ -284,222 +283,217 @@ public class GradeBook
        
        		try
        		{
+			// Read in file selected by user
     	   		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
     	   		{
     		   		classFile = chooser.getSelectedFile();
     		   		inFile = new Scanner(classFile);
     		   		fileHeader = inFile.nextLine(); 
     		   
-    		   // loop and get names into ArrayList
-    		   System.out.println(fileHeader);
-    		   // write new col for grade and add it to existing fileHeader
-    		   colHeader = SafeInput.getNonZeroLenString(in, "Enter header for grade column: [Lab01, Test03, Quiz06, etc.]");
-    		   fileHeader = fileHeader + ", " + colHeader;
+    		   		// Add grade column header to existing header, then loop and store each record
+    		   		System.out.println(fileHeader);
+    		   		colHeader = SafeInput.getNonZeroLenString(in, "Enter header for grade column: [Lab01, Test03, Quiz06, etc.]");
+    		   		fileHeader = fileHeader + ", " + colHeader;
+    		   		System.out.println("============================================");
+    		   		while(inFile.hasNextLine())
+    		   		{
+    			   		studentRecord = inFile.nextLine();
+    			   		studentRecordCount++;
+    			   		names.add(studentRecord);
+    			   		System.out.println(formatRecordDisplay(studentRecordCount, studentRecord));
+    		   		}
+    		   		System.out.println("============================================");
+    		   		inFile.close();
     		   
-    		   System.out.println("============================================");
-    		   while(inFile.hasNextLine())
-    		   {
-    			   studentRecord = inFile.nextLine();
-    			   studentRecordCount++;
-    			   names.add(studentRecord);
-    			   // System.out.println(studentRecordCount + " " + studentRecord);
-    			   System.out.println(formatRecordDisplay(studentRecordCount, studentRecord));
-    		   }
-    		   System.out.println("============================================");
-
-    		   inFile.close();
+				
+    		   		// Confirm if this is the correct class
+    		   		confirmReport = SafeInput.getYNConfirm(in, "Is this the class you'd like to enter grades for");
+    		   		if (confirmReport == true)
+    		   		{
+	    		   		for (int nm = 0; nm < names.size(); nm++)
+	    		   		{
+	    			   		// Prompt with name of student to add grade for (0-100)
+	    			   		curGrade = SafeInput.getRangedInt(in, "Enter grade for: " + names.get(nm), 0, 100);
+	    			   		names.set(nm, names.get(nm) + ", " + curGrade);
+	    		   		}
+					
+	    		   		// Write header and grades records to file
+	    		   		outFile = new PrintWriter(classFile);
+	    		   		outFile.println(fileHeader);
+	    		   		for (String name : names)
+	    		   		{
+	    			   		outFile.println(name);
+	    		   		}
+    		       			outFile.close();
+    		   		}
+    		   		else
+    		   		{
+    			   		System.out.println("Returning to menu...");
+    			   		return;
+    		   		}
     		   
-    		   // confirm the teacher selected to correct class
-    		   confirmReport = SafeInput.getYNConfirm(in, "Is this the class you'd like to enter grades for");
-    		   if (confirmReport == true)
-    		   {
-	    		   for (int nm = 0; nm < names.size(); nm++)
-	    		   {
-	    			   // prompt with name of student to add grade for (0-100)
-	    			   curGrade = SafeInput.getRangedInt(in, "Enter grade for: " + names.get(nm), 0, 100);
-	    			   names.set(nm, names.get(nm) + ", " + curGrade);
-	    		   }
-    		   
-	    		   // now write grades records to file
-	    		   outFile = new PrintWriter(classFile);
-	    		   outFile.println(fileHeader); // write the file header
-    		   
-	    		   for (String name : names)
-	    		   {
-	    			   outFile.println(name);
-	    		   }
-    		       outFile.close();
-    		   }
-    		   else
-    		   {
-    			   System.out.println("Returning to menu...");
-    			   return;
-    		   }
-    		   
-    	   }
-    	   else
-    	   {
-    		   System.out.println("You must choose a file. \nReturning to menu...");
-    		   in.close();
-    		   return;
-    	   }
-    	   
-       } 
-       catch (FileNotFoundException ex) 
-       {
-    	   System.out.println("Error, could not create output file! Terminating the system.");
-    	   System.exit(0);
-       } 
-       catch (IOException ex) 
-       {
-    	   ex.getStackTrace();
-    	   System.exit(0);
-       } 
+    	   		}
+    	   		else
+    	   		{
+    		   	System.out.println("You must choose a file. \nReturning to menu...");
+    		   	in.close();
+    		   	return;
+    	   		}
+			
+       		} 
+       		catch (FileNotFoundException ex) 
+       		{
+    	   		System.out.println("Error, could not create output file! Terminating the system.");
+    	   		System.exit(0);
+       		} 
+       		catch (IOException ex) 
+       		{
+    	   		ex.getStackTrace();
+    	   		System.exit(0);
+       		} 
 	   
-   } 
+   	} 
 
 
-   private static void deleteGradeCol() 
-   {
-	   String studentRecord = "";
-	   String fileHeader = "";
-	   String colHeader = "";
-	   boolean confirmReport = false;
-       File classFile;
-       Scanner inFile;
-       Scanner in = new Scanner (System.in);
-       JFileChooser chooser = new JFileChooser();
-       PrintWriter outFile;
-       ArrayList<String> lines = new ArrayList<>();
-       FileNameExtensionFilter filter = new FileNameExtensionFilter("Class Set File", "txt", "text", "csv");
-       chooser.addChoosableFileFilter(filter);
-       File workingDirectory = new File(System.getProperty("user.dir"));
-       chooser.setCurrentDirectory(workingDirectory);
+   	/**   
+	* Deletes grade column from a class set
+	*/		
+   	private static void deleteGradeCol() 
+   	{
+		// Variables
+	   	String studentRecord = "";
+	   	String fileHeader = "";
+	   	String colHeader = "";
+	   	boolean confirmReport = false;
+		int studentRecordCount = 0;
+       		int curGrade = 0;
+       		int lowGrade = 0;
+       		int highGrade = 100;
+		
+		// For I/O
+       		File classFile;
+       		Scanner inFile;
+       		Scanner in = new Scanner (System.in);
+       		JFileChooser chooser = new JFileChooser();
+       		PrintWriter outFile;
+       		ArrayList<String> lines = new ArrayList<>();
+       		FileNameExtensionFilter filter = new FileNameExtensionFilter("Class Set File", "txt", "text", "csv");
+       		chooser.addChoosableFileFilter(filter);
+       		File workingDirectory = new File(System.getProperty("user.dir"));
+       		chooser.setCurrentDirectory(workingDirectory);
+
        
-       int studentRecordCount = 0;
-       int curGrade = 0;
-       int lowGrade = 0;
-       int highGrade = 100;
-       
-       try
-       {
-    	   if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
-    	   {
-    		   classFile = chooser.getSelectedFile();
-    		   inFile = new Scanner(classFile);
-    		   fileHeader = inFile.nextLine(); 
+       			try
+       			{
+				// Read in file selected by user
+    	   			if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+    	   			{
+    		   			classFile = chooser.getSelectedFile();
+    		   			inFile = new Scanner(classFile);
+    		   			fileHeader = inFile.nextLine(); 
     		   
-    		   // loop and get names into ArrayList
-    		   System.out.println(fileHeader);
+    		   			// Display class set for verification
+    		   			System.out.println(fileHeader);
+    		   			System.out.println("============================================");
+    		   			while(inFile.hasNextLine())
+    		   			{
+    			   			studentRecord = inFile.nextLine();
+    			   			studentRecordCount++;
+    			   			lines.add(studentRecord);
+    			   			System.out.println(formatRecordDisplay(studentRecordCount, studentRecord));
+    		   			}
+    		   			System.out.println("============================================");
+    		   			inFile.close();
     		   
-    		   System.out.println("============================================");
-    		   while(inFile.hasNextLine())
-    		   {
-    			   studentRecord = inFile.nextLine();
-    			   studentRecordCount++;
-    			   lines.add(studentRecord);
-    			   // System.out.println(studentRecordCount + " " + studentRecord);
-    			   System.out.println(formatRecordDisplay(studentRecordCount, studentRecord));
-    		   }
-    		   System.out.println("============================================");
-
-    		   inFile.close();
-    		   
-    		   // confirm the teacher selected to correct class
-    		   confirmReport = SafeInput.getYNConfirm(in, "Is this the class you'd like to delete a grade from");
-    		   if (confirmReport == true)
-    		   {
-    			   // get delete choice
-    			   String cols [] = fileHeader.split(",");
-    			   int colToDelete = SafeInput.getRangedInt(in, "Which grade do you want to delete?" + "[1-" + (cols.length-1) + "]", 1, cols.length-1);
+					
+    		   			// Confirm if this is the correct class, then get column to delete
+    		   			confirmReport = SafeInput.getYNConfirm(in, "Is this the class you'd like to delete a grade from");
+    		   			if (confirmReport == true)
+    		   			{
+    			   			String cols [] = fileHeader.split(",");
+    			   			int colToDelete = SafeInput.getRangedInt(in, "Which grade do you want to delete?" + "[1-" + (cols.length-1) + "]", 1, cols.length-1);
     			   
-    			   // confirm delete choice
-    			   if (!SafeInput.getYNConfirmB(in, "Are you sure you want to delete" + cols[colToDelete]))
-    			   {
-    				   System.out.println("Returning to menu...");
-    				   return;
-    			   }
+    			   			// Confirm column to delete
+    			   			if (!SafeInput.getYNConfirmB(in, "Are you sure you want to delete" + cols[colToDelete]))
+    			   			{
+    				   			System.out.println("Returning to menu...");
+    				   			return;
+    			   			}
+    			   			lines.add(0, fileHeader);
     			   
-    			   lines.add(0, fileHeader);
-    			   
-    			   // loop and add each line into its own ArrayList
-	    		   outFile = new PrintWriter(classFile);
-	    		   ArrayList<String> curLine = new ArrayList<>();
-	    		   String formedLine = "";
-	    		   
-	    		   for (String li : lines)
-	    		   {
-	    			   curLine.clear();
-	    			   cols = li.split(",");
-	    			   for (int col = 0; col < cols.length; col++)
-	    			   {
-	    				   if (col != colToDelete)
-	    				   {
-	    					   curLine.add(cols[col]);
-	    				   }
-	    			   }
+    			   			// Loop and add each line into its own ArrayList
+	    		   			outFile = new PrintWriter(classFile);
+	    		   			ArrayList<String> curLine = new ArrayList<>();
+	    		   			String formedLine = "";
+	    		   			for (String li : lines)
+	    		   			{
+	    			   			curLine.clear();
+	    			   			cols = li.split(",");
+	    			   			for (int col = 0; col < cols.length; col++)
+	    			   			{
+	    				   			if (col != colToDelete)
+	    				   			{
+	    					   			curLine.add(cols[col]);
+	    				   			}
+	    			   			}
+	    			   			formedLine = ""; // clear formed line
 	    			   
-	    			   formedLine = ""; // clear out formed line for each iteration
-	    			   
-	    			   for (int col = 0; col < curLine.size(); col++)
-	    			   {
-	    				   formedLine += curLine.get(col);
-	    				   if (col != curLine.size() - 1)
-	    				   {
-	    					   formedLine += ", ";
-	    				   }
-	    			   }
-	    			   outFile.println(formedLine);
+	    			   			for (int col = 0; col < curLine.size(); col++)
+	    			   			{
+	    				   			formedLine += curLine.get(col);
+	    				   			if (col != curLine.size() - 1)
+	    				   			{
+	    					   			formedLine += ", ";
+	    				   			}
+	    			   			}
+	    			   			outFile.println(formedLine); // clear formed line
 
-	    		   }
-    		       outFile.close();
+	    		   			}
+    		       				outFile.close();
     		       
-        		   inFile = new Scanner(classFile);
-        		   fileHeader = inFile.nextLine(); 
-        		   
-        		   // loop and get names into ArrayList
-        		   System.out.println(fileHeader);
-        		   
-        		   System.out.println("============================================");
-        		   while(inFile.hasNextLine())
-        		   {
-        			   studentRecord = inFile.nextLine();
-        			   studentRecordCount++;
-        			   lines.add(studentRecord);
-        			   // System.out.println(studentRecordCount + " " + studentRecord);
-        			   System.out.println(formatRecordDisplay(studentRecordCount, studentRecord));
-        		   }
-        		   System.out.println("============================================");
-
-        		   inFile.close();
+						
+						// Display updated class set
+        		   			inFile = new Scanner(classFile);
+        		   			fileHeader = inFile.nextLine(); 
+        		   			System.out.println(fileHeader);
+        		   			System.out.println("============================================");
+        		   			while(inFile.hasNextLine())
+        		   			{
+        			   			studentRecord = inFile.nextLine();
+        			   			studentRecordCount++;
+        			   			lines.add(studentRecord);
+        			   			System.out.println(formatRecordDisplay(studentRecordCount, studentRecord));
+        		   			}
+        		   			System.out.println("============================================");
+        		   			inFile.close();
     		       
-    		   }
-    		   else
-    		   {
-    			   System.out.println("Returning to menu...");
-    			   return;
-    		   }
+    		   			}
+    		   			else
+    		   			{
+    			   		System.out.println("Returning to menu...");
+    			   		return;
+    		   			}
     		   
-    	   }
-    	   else
-    	   {
-    		   System.out.println("You must choose a file. \nReturning to menu...");
-    		   in.close();
-    		   return;
-    	   }
+    	   			}
+    	   			else
+    	   			{
+    		   		System.out.println("You must choose a file. \nReturning to menu...");
+    		   		in.close();
+    		   		return;
+    	   			}
     	   
-       } 
-       catch (FileNotFoundException ex) 
-       {
-    	   System.out.println("Error, could not create output file! Terminating the system.");
-    	   System.exit(0);
-       } 
-       catch (IOException ex) 
-       {
-    	   ex.getStackTrace();
-    	   System.exit(0);
-       } 
+		       	} 
+		       	catch (FileNotFoundException ex) 
+		       	{
+			   	System.out.println("Error, could not create output file! Terminating the system.");
+			   	System.exit(0);
+		       	} 
+		       	catch (IOException ex) 
+		       	{
+			   	ex.getStackTrace();
+			   	System.exit(0);
+		       	} 
       
-   }
+   	}
 
 }
